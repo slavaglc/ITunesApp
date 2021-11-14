@@ -22,6 +22,11 @@ final class AlbumListViewController: UICollectionViewController {
         AlbumListConfigurator.shared.configure(with: self)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        getAlbums()
+    }
+    
     private func setupNavigationBar() {
         if #available(iOS 13.0, *) {
             let navBarAppearance = UINavigationBarAppearance()
@@ -35,19 +40,21 @@ final class AlbumListViewController: UICollectionViewController {
     }
     
     
+    private func getAlbums() {
+        interactor?.fetchAlbums()
+    }
 }
 
 extension AlbumListViewController: AlbumListDisplayLogic {
     func showAlbums(viewModel: AlbumList.PresentingAlbums.ViewModel) {
         items = viewModel.items
-        DispatchQueue.main.async { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
             self?.collectionView.reloadData()
         }
     }
-    
 }
 
-extension AlbumListViewController {
+extension AlbumListViewController: UICollectionViewDelegateFlowLayout {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cellViewModel = items[indexPath.item]
@@ -59,5 +66,23 @@ extension AlbumListViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         items.count
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        CGSize(width: UIScreen.main.bounds.width / 3.2 , height: UIScreen.main.bounds.width / 3.2 )
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        UIEdgeInsets(top: 5, left: 5, bottom: 10, right: 5)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        3
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        0
+    }
+    
+    
 }
 

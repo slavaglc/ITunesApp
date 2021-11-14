@@ -59,11 +59,21 @@ final class AlbumCollectionViewCell: UICollectionViewCell, CellModelRepresentabl
         addSubview(artistLabel)
     }
     
+    private func setupNameLabelLayout() {
+        
+    }
+    
     
     private func updateView() {
         guard let viewModel = viewModel as? AlbumCellViewModel else { return }
         nameLabel.text = viewModel.name
         artistLabel.text = viewModel.artist
+        guard let imageURL = viewModel.imageURL else { return }
+        
+        ImageManager.shared.fetchImage(url: imageURL) { data in
+            self.imageView.image = UIImage(data: data)
+        }
     }
+    
     
 }

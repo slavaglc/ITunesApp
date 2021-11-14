@@ -9,7 +9,7 @@ import Foundation
 
 
 protocol AlbumListPresentationLogic {
-    func presentAlbums()
+    func presentAlbums(response: AlbumList.PresentingAlbums.Response)
 }
 
 class AlbumListPresenter {
@@ -17,8 +17,16 @@ class AlbumListPresenter {
 }
 
 extension AlbumListPresenter: AlbumListPresentationLogic {
-    func presentAlbums() {
+    
+    func presentAlbums(response: AlbumList.PresentingAlbums.Response) {
+        var items: [AlbumCellViewModel] = []
         
+        response.albums.forEach { album in
+            items.append(AlbumCellViewModel(album: album))
+        }
+        
+        let viewModel = AlbumList.PresentingAlbums.ViewModel.init(items: items)
+        viewController?.showAlbums(viewModel: viewModel)
     }
     
 }

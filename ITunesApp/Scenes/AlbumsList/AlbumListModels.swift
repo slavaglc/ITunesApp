@@ -26,10 +26,10 @@ enum AlbumList {
             struct AlbumCellViewModel: CellIdentifiable {
                 var name: String
                 var artist: String
-                var imageURL: URL
+                var imageURL: URL?
                 
                 var identifier: String {
-                    "AlbumCell"
+                    AlbumCollectionViewCell.nameOfClass
                 }
                 
                 var height: Double {
@@ -41,8 +41,8 @@ enum AlbumList {
                 }
                 
                 init(album: Album) {
-                    name = album.name
-                    artist = album.artist
+                    name = album.name ?? "Unknow album"
+                    artist = album.artist ?? "Unknow artist"
                     imageURL = album.imageURL
                 }
             }

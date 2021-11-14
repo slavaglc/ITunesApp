@@ -5,7 +5,6 @@
 //  Created by Вячеслав Макаров on 12.11.2021.
 //
 
-import Foundation
 
 
 
@@ -24,6 +23,7 @@ class AlbumListConfigurator {
         interactor.presenter = presenter
         presenter.viewController = viewController
         
+        viewController.collectionView.register(AlbumCollectionViewCell.self, forCellWithReuseIdentifier: AlbumCollectionViewCell.nameOfClass)
     }
-
+    
 }
