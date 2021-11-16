@@ -14,6 +14,7 @@ protocol AlbumListDisplayLogic {
 
 final class AlbumListViewController: UICollectionViewController {
     var interactor: AlbumListBusinessLogic?
+    var router: AlbumListRoutingLogic?
     private var items: [CellIdentifiable] = []
     
     override func viewDidLoad() {
@@ -28,17 +29,15 @@ final class AlbumListViewController: UICollectionViewController {
     }
     
     private func setupNavigationBar() {
-        if #available(iOS 13.0, *) {
             let navBarAppearance = UINavigationBarAppearance()
             navBarAppearance.configureWithOpaqueBackground()
             navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
             navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-            navBarAppearance.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+            navBarAppearance.backgroundColor = #colorLiteral(red: 0.521568656, green: 0.1098039225, blue: 0.05098039284, alpha: 1)
             navigationController?.navigationBar.standardAppearance = navBarAppearance
             navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
-        }
+            navigationController?.navigationBar.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     }
-    
     
     private func getAlbums() {
         interactor?.fetchAlbums()
@@ -51,6 +50,14 @@ extension AlbumListViewController: AlbumListDisplayLogic {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
             self?.collectionView.reloadData()
         }
+    }
+}
+
+extension AlbumListViewController {
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        router?.routeToAlbumDetails()
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
 }
 
@@ -82,7 +89,5 @@ extension AlbumListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         0
     }
-    
-    
 }
 

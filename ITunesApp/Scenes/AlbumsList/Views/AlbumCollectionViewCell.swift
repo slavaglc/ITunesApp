@@ -38,8 +38,7 @@ final class AlbumCollectionViewCell: UICollectionViewCell, CellModelRepresentabl
         super.layoutSubviews()
         
         imageView.frame = self.contentView.frame
-        nameLabel.frame.size.width = self.contentView.frame.width
-        artistLabel.frame.size.width = self.contentView.frame.width
+
     }
     
     override func prepareForReuse() {
@@ -50,16 +49,45 @@ final class AlbumCollectionViewCell: UICollectionViewCell, CellModelRepresentabl
         }
     }
     
+    override func didAddSubview(_ subview: UIView) {
+        super.didAddSubview(subview)
+        setupNameLabelLayout()
+        setupArtitsNameLayout()
+    }
+    
     private func initialize() {
         backgroundColor = .yellow
-        
         imageView.contentMode = .scaleToFill
         addSubview(imageView)
         addSubview(nameLabel)
         addSubview(artistLabel)
     }
     
+  
     private func setupNameLabelLayout() {
+        let labelWidth = self.contentView.frame.width
+        let labelHeight = nameLabel.font.lineHeight * 1.5
+        let labelPositionX = self.contentView.bounds.minX
+        let labelPositionY = self.contentView.bounds.maxY - nameLabel.frame.height
+        nameLabel.frame = CGRect(x: labelPositionX, y: labelPositionY, width: labelWidth, height: labelHeight)
+        nameLabel.textAlignment = .center
+        
+        nameLabel.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+        nameLabel.textColor = .white
+    }
+    
+    private func setupArtitsNameLayout() {
+        artistLabel.font = UIFont(name: "Arial-BoldMT", size: 11)
+        
+        let labelWidth = self.contentView.frame.width
+        let labelHeight = artistLabel.font.lineHeight
+        let labelPositionX = self.contentView.bounds.minX
+        let labelPositionY = self.contentView.bounds.minY
+        artistLabel.frame = CGRect(x: labelPositionX, y: labelPositionY, width: labelWidth, height: labelHeight)
+        
+        artistLabel.backgroundColor = .white
+            .withAlphaComponent(0.7)
+        artistLabel.textAlignment = .center
         
     }
     
@@ -74,6 +102,4 @@ final class AlbumCollectionViewCell: UICollectionViewCell, CellModelRepresentabl
             self.imageView.image = UIImage(data: data)
         }
     }
-    
-    
 }

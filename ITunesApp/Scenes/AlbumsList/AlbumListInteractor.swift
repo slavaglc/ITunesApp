@@ -16,7 +16,7 @@ protocol AlbumListDataStore {
     var albums: [Album] { get }
 }
 
-class AlbumListInteractor: AlbumListDataStore {
+final class AlbumListInteractor: AlbumListDataStore {
     var presenter: AlbumListPresentationLogic?
     var albums: [Album] = []
 }
@@ -29,5 +29,4 @@ extension AlbumListInteractor: AlbumListBusinessLogic {
             self.presenter?.presentAlbums(response: response)
         }
     }
-    
 }

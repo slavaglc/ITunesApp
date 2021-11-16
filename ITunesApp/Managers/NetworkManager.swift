@@ -8,7 +8,7 @@
 import Foundation
 
 
-final class NetworkManager {
+public final class NetworkManager {
     
     static let shared = NetworkManager()
     let API =  "https://itunes.apple.com/search?term=billy+talent&entity=album"

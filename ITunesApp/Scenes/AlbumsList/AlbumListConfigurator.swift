@@ -8,7 +8,7 @@
 
 
 
-class AlbumListConfigurator {
+final class AlbumListConfigurator {
 
     static let shared = AlbumListConfigurator()
     
@@ -18,10 +18,14 @@ class AlbumListConfigurator {
         let viewController = viewController
         let interactor = AlbumListInteractor()
         let presenter = AlbumListPresenter()
+        let router = AlbumListRouter()
         
         viewController.interactor = interactor
+        viewController.router = router
         interactor.presenter = presenter
         presenter.viewController = viewController
+        router.dataStore = interactor
+        router.viewController = viewController
         
         viewController.collectionView.register(AlbumCollectionViewCell.self, forCellWithReuseIdentifier: AlbumCollectionViewCell.nameOfClass)
     }

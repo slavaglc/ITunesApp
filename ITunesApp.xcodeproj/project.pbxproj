@@ -24,6 +24,12 @@
 		F9E512912740164900259B80 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E512902740164900259B80 /* Album.swift */; };
 		F9E512942740437200259B80 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E512932740437200259B80 /* NetworkManager.swift */; };
 		F9E5129627410DB100259B80 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E5129527410DB100259B80 /* ImageManager.swift */; };
+		F9E51299274187C200259B80 /* AlbumDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E51298274187C200259B80 /* AlbumDetailsViewController.swift */; };
+		F9E5129B274187F300259B80 /* AlbumDetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E5129A274187F300259B80 /* AlbumDetailsInteractor.swift */; };
+		F9E5129D2741881300259B80 /* AlbumDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E5129C2741881300259B80 /* AlbumDetailsPresenter.swift */; };
+		F9E5129F2741882E00259B80 /* AlbumDetailsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E5129E2741882E00259B80 /* AlbumDetailsConfigurator.swift */; };
+		F9E512A12741894B00259B80 /* AlbumListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E512A02741894B00259B80 /* AlbumListRouter.swift */; };
+		F9E512A32741985D00259B80 /* AlbumDetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E512A22741985D00259B80 /* AlbumDetailsRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +71,12 @@
 		F9E512902740164900259B80 /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		F9E512932740437200259B80 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		F9E5129527410DB100259B80 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		F9E51298274187C200259B80 /* AlbumDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailsViewController.swift; sourceTree = "<group>"; };
+		F9E5129A274187F300259B80 /* AlbumDetailsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailsInteractor.swift; sourceTree = "<group>"; };
+		F9E5129C2741881300259B80 /* AlbumDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailsPresenter.swift; sourceTree = "<group>"; };
+		F9E5129E2741882E00259B80 /* AlbumDetailsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailsConfigurator.swift; sourceTree = "<group>"; };
+		F9E512A02741894B00259B80 /* AlbumListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumListRouter.swift; sourceTree = "<group>"; };
+		F9E512A22741985D00259B80 /* AlbumDetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailsRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +161,7 @@
 				F9E51287273EF52D00259B80 /* Extensions */,
 				F9E5128F2740162B00259B80 /* Models */,
 				F9E51286273EF42900259B80 /* AlbumsList */,
+				F9E512972741875B00259B80 /* AlbumDetails */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -162,6 +175,7 @@
 				F9E51282273EEDE100259B80 /* AlbumListPresenter.swift */,
 				F9E51284273EF1C900259B80 /* AlbumListConfigurator.swift */,
 				F9E5128D274015C200259B80 /* AlbumListModels.swift */,
+				F9E512A02741894B00259B80 /* AlbumListRouter.swift */,
 			);
 			path = AlbumsList;
 			sourceTree = "<group>";
@@ -197,6 +211,18 @@
 				F9E5129527410DB100259B80 /* ImageManager.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		F9E512972741875B00259B80 /* AlbumDetails */ = {
+			isa = PBXGroup;
+			children = (
+				F9E51298274187C200259B80 /* AlbumDetailsViewController.swift */,
+				F9E5129A274187F300259B80 /* AlbumDetailsInteractor.swift */,
+				F9E5129C2741881300259B80 /* AlbumDetailsPresenter.swift */,
+				F9E5129E2741882E00259B80 /* AlbumDetailsConfigurator.swift */,
+				F9E512A22741985D00259B80 /* AlbumDetailsRouter.swift */,
+			);
+			path = AlbumDetails;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -329,18 +355,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9E512A12741894B00259B80 /* AlbumListRouter.swift in Sources */,
 				F9E5128C2740141C00259B80 /* AlbumCollectionViewCell.swift in Sources */,
 				F9E51283273EEDE100259B80 /* AlbumListPresenter.swift in Sources */,
 				F9E51281273EEDD300259B80 /* AlbumListInteractor.swift in Sources */,
+				F9E5129F2741882E00259B80 /* AlbumDetailsConfigurator.swift in Sources */,
 				F9E5129627410DB100259B80 /* ImageManager.swift in Sources */,
 				F9E5128E274015C200259B80 /* AlbumListModels.swift in Sources */,
+				F9E5129B274187F300259B80 /* AlbumDetailsInteractor.swift in Sources */,
 				F9E512942740437200259B80 /* NetworkManager.swift in Sources */,
 				F9E5124E273EDC3200259B80 /* AppDelegate.swift in Sources */,
 				F9E51250273EDC3200259B80 /* SceneDelegate.swift in Sources */,
 				F9E51285273EF1C900259B80 /* AlbumListConfigurator.swift in Sources */,
+				F9E51299274187C200259B80 /* AlbumDetailsViewController.swift in Sources */,
+				F9E512A32741985D00259B80 /* AlbumDetailsRouter.swift in Sources */,
 				F9E5127F273EE8D500259B80 /* AlbumListViewController.swift in Sources */,
 				F9E51289273EF5C700259B80 /* NSObject+ClassName.swift in Sources */,
 				F9E512912740164900259B80 /* Album.swift in Sources */,
+				F9E5129D2741881300259B80 /* AlbumDetailsPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,7 +471,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -494,7 +526,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -516,8 +548,10 @@
 				INFOPLIST_FILE = ITunesApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -527,7 +561,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -543,8 +577,10 @@
 				INFOPLIST_FILE = ITunesApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -554,7 +590,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

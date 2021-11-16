@@ -12,7 +12,7 @@ protocol AlbumListPresentationLogic {
     func presentAlbums(response: AlbumList.PresentingAlbums.Response)
 }
 
-class AlbumListPresenter {
+final class AlbumListPresenter {
     var viewController: AlbumListDisplayLogic?
 }
 
