@@ -27,6 +27,7 @@ enum AlbumList {
                 var name: String
                 var artist: String
                 var imageURL: URL?
+                var albumID: Int?
                 
                 var identifier: String {
                     AlbumCollectionViewCell.nameOfClass
@@ -44,6 +45,7 @@ enum AlbumList {
                     name = album.name ?? "Unknow album"
                     artist = album.artist ?? "Unknow artist"
                     imageURL = album.imageURL
+                    albumID = album.albumID
                 }
             }
             let items: [AlbumCellViewModel]

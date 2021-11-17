@@ -7,13 +7,17 @@
 import UIKit
 
 protocol AlbumDetailsDisplayLogic {
-    
+    func displayAlbumID(album: Album)
 }
 
 
-final class AlbumDetailsViewController: UIViewController, AlbumDetailsDisplayLogic {
+final class AlbumDetailsViewController: UIViewController {
+   
+    
     var router: (NSObject & AlbumDetailsRoutingLogic & AlbumDetailsDataPassing)?
     var interactor: AlbumDetailsBusinessLogic?
+    
+    var label: UILabel?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -28,18 +32,19 @@ final class AlbumDetailsViewController: UIViewController, AlbumDetailsDisplayLog
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
+        interactor?.fetchAlbumData()
     }
     
     private func setupLayout() {
         view.backgroundColor = .white
         let imageView = createImageView()
-        let label = createLabel()
+        label = createLabel()
         let button = createButton()
         
         view.addSubview(imageView)
-        view.addSubview(label)
+        view.addSubview(label!)
         view.addSubview(button)
-        setupSequentialConstraints(for: [imageView, label, button])
+        setupSequentialConstraints(for: [imageView, label!, button])
     }
     
     
@@ -114,4 +119,10 @@ final class AlbumDetailsViewController: UIViewController, AlbumDetailsDisplayLog
     }
     
     
+}
+
+extension AlbumDetailsViewController: AlbumDetailsDisplayLogic {
+    func displayAlbumID(album: Album) {
+        label?.text = String(album.albumID!)
+    }
 }

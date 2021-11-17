@@ -10,8 +10,14 @@ import Foundation
 
 
 protocol AlbumDetailsPresentingLogic {
+    func showAlbumID(album: Album)
 }
 
 class AlbumDetailsPresenter: AlbumDetailsPresentingLogic {
+    
     var viewController: AlbumDetailsDisplayLogic?
+    
+    func showAlbumID(album: Album) {
+        viewController?.displayAlbumID(album: album)
+    }
 }

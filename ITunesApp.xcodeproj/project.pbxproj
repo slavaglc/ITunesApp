@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F9835D1B27458B7100A86B14 /* AlbumDetailsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9835D1A27458B7100A86B14 /* AlbumDetailsModels.swift */; };
 		F9E5124E273EDC3200259B80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E5124D273EDC3200259B80 /* AppDelegate.swift */; };
 		F9E51250273EDC3200259B80 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E5124F273EDC3200259B80 /* SceneDelegate.swift */; };
 		F9E51257273EDC3300259B80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9E51256273EDC3300259B80 /* Assets.xcassets */; };
@@ -50,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F9835D1A27458B7100A86B14 /* AlbumDetailsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailsModels.swift; sourceTree = "<group>"; };
 		F9E5124A273EDC3200259B80 /* ITunesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ITunesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9E5124D273EDC3200259B80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F9E5124F273EDC3200259B80 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 				F9E5129A274187F300259B80 /* AlbumDetailsInteractor.swift */,
 				F9E5129C2741881300259B80 /* AlbumDetailsPresenter.swift */,
 				F9E5129E2741882E00259B80 /* AlbumDetailsConfigurator.swift */,
+				F9835D1A27458B7100A86B14 /* AlbumDetailsModels.swift */,
 				F9E512A22741985D00259B80 /* AlbumDetailsRouter.swift */,
 			);
 			path = AlbumDetails;
@@ -365,6 +368,7 @@
 				F9E5129B274187F300259B80 /* AlbumDetailsInteractor.swift in Sources */,
 				F9E512942740437200259B80 /* NetworkManager.swift in Sources */,
 				F9E5124E273EDC3200259B80 /* AppDelegate.swift in Sources */,
+				F9835D1B27458B7100A86B14 /* AlbumDetailsModels.swift in Sources */,
 				F9E51250273EDC3200259B80 /* SceneDelegate.swift in Sources */,
 				F9E51285273EF1C900259B80 /* AlbumListConfigurator.swift in Sources */,
 				F9E51299274187C200259B80 /* AlbumDetailsViewController.swift in Sources */,
