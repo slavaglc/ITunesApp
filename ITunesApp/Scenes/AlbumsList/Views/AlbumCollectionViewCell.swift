@@ -14,7 +14,7 @@ protocol CellModelRepresentable {
 
 final class AlbumCollectionViewCell: UICollectionViewCell, CellModelRepresentable {
     
-    private let imageView = UIImageView()
+    private let imageView = AdvancedImageView()
     private let nameLabel = UILabel()
     private let artistLabel = UILabel()
     
@@ -98,8 +98,7 @@ final class AlbumCollectionViewCell: UICollectionViewCell, CellModelRepresentabl
         artistLabel.text = viewModel.artist
         guard let imageURL = viewModel.imageURL else { return }
         
-        ImageManager.shared.fetchImage(url: imageURL) { data in
-            self.imageView.image = UIImage(data: data)
-        }
+        imageView.setImage(by: imageURL, forKey: viewModel.albumID)
+
     }
 }

@@ -27,7 +27,7 @@ enum AlbumList {
                 var name: String
                 var artist: String
                 var imageURL: URL?
-                var albumID: Int?
+                var albumID: Int
                 
                 var identifier: String {
                     AlbumCollectionViewCell.nameOfClass

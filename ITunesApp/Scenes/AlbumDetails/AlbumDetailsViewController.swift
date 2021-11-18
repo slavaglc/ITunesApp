@@ -7,17 +7,18 @@
 import UIKit
 
 protocol AlbumDetailsDisplayLogic {
-    func displayAlbumID(album: Album)
+    func displayAlbumInfo(viewModel: AlbumDetailsViewModel)
 }
 
 
 final class AlbumDetailsViewController: UIViewController {
    
-    
+//MARK: - Entities
     var router: (NSObject & AlbumDetailsRoutingLogic & AlbumDetailsDataPassing)?
     var interactor: AlbumDetailsBusinessLogic?
-    
-    var label: UILabel?
+//MARK: - UI Elements
+    var albumInfoLabel: UILabel?
+    var albumImageView: AdvancedImageView?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -37,20 +38,22 @@ final class AlbumDetailsViewController: UIViewController {
     
     private func setupLayout() {
         view.backgroundColor = .white
-        let imageView = createImageView()
-        label = createLabel()
+        albumImageView = createImageView()
+        albumInfoLabel = createLabel()
+        guard let albumImageView = albumImageView else { return }
+        guard let albumInfoLabel = albumInfoLabel else { return }
         let button = createButton()
         
-        view.addSubview(imageView)
-        view.addSubview(label!)
+        view.addSubview(albumImageView)
+        view.addSubview(albumInfoLabel)
         view.addSubview(button)
-        setupSequentialConstraints(for: [imageView, label!, button])
+        setupSequentialConstraints(for: [albumImageView, albumInfoLabel, button])
     }
     
     
-    
-    private func createImageView() -> UIImageView {
-        let imageView = UIImageView()
+//    MARK: - Creating UI Elements
+    private func createImageView() -> AdvancedImageView {
+        let imageView = AdvancedImageView()
         imageView.backgroundColor = .yellow
         return imageView
     }
@@ -58,8 +61,9 @@ final class AlbumDetailsViewController: UIViewController {
     private func createLabel() -> UILabel {
         let label = UILabel()
         label.numberOfLines = 0
-        label.text = "AlbumInfoAlbumInfoAlbumInfoAlbumInfoAlbumInfoAlbumInfoAlbumInfoAlbumInfoAlbumInfoAlbumInfoAlbumInfoAlbumInfoAlbumInfoAlbumInfoAlbumInfoAlbumInfoAlbumInfoAlbumInfoAlbumInfoAlbumInfoAlbumInfoAlbumInfoAlbumInfoAlbumInfoAlbumInfoAlbumInfoAlbumInfoAlbumInfoAlbumInfo"
-        
+        label.text = "AlbumInfo"
+        label.backgroundColor = .gray
+            .withAlphaComponent(0.7)
         return label
     }
     
@@ -113,16 +117,22 @@ final class AlbumDetailsViewController: UIViewController {
             }
         }
     }
-        
+//        MARK: - Configure Clean Swift pattern
     private func setup() {
         AlbumDetailsConfigurator.shared.configure(with: self)
     }
-    
-    
 }
 
+
+//      MARK: - Display Logic
 extension AlbumDetailsViewController: AlbumDetailsDisplayLogic {
-    func displayAlbumID(album: Album) {
-        label?.text = String(album.albumID!)
+  
+     func displayAlbumInfo(viewModel: AlbumDetailsViewModel) {
+        albumInfoLabel?.text = viewModel.description
+        
+         guard let imageURL = viewModel.albumViewModel.imageURL else { return }
+         
+         albumImageView?.setImage(by: imageURL, forKey: viewModel.albumViewModel.albumID)
     }
+    
 }

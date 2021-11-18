@@ -9,7 +9,7 @@ import Foundation
 
 
 struct Album {
-    let albumID: Int?
+    let albumID: Int!
     let name: String?
     let artist: String?
     let imageURL: URL?
@@ -27,7 +27,7 @@ struct Album {
         
         name = albumName
         artist = artistName
-        albumID = collectionId
+        albumID = collectionId ?? 0
         self.releaseDate = releaseDate
         self.country = country
         

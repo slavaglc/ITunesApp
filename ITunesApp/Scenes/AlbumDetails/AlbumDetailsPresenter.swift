@@ -10,14 +10,34 @@ import Foundation
 
 
 protocol AlbumDetailsPresentingLogic {
-    func showAlbumID(album: Album)
+    func presentAlbumInfo(response: AlbumDetails.PresentingAlbum.Response)
 }
 
-class AlbumDetailsPresenter: AlbumDetailsPresentingLogic {
+final class AlbumDetailsPresenter: AlbumDetailsPresentingLogic {
     
     var viewController: AlbumDetailsDisplayLogic?
     
-    func showAlbumID(album: Album) {
-        viewController?.displayAlbumID(album: album)
+    func presentAlbumInfo(response: AlbumDetails.PresentingAlbum.Response) {
+        let album = response.album
+        let description = getDescription(for: response)
+        let albumDetailsViewModel = AlbumDetailsViewModel(description: description, albumViewModel: AlbumDetailsViewModel.AlbumViewModel(album: album))
+        viewController?.displayAlbumInfo(viewModel: albumDetailsViewModel)
+    }
+    
+    
+    
+    private func getDescription(for response: AlbumDetails.PresentingAlbum.Response) -> String {
+        let album = response.album
+        let date = album.releaseDate?.components(separatedBy: "T")
+        let unknow = "Unknow"
+        let day = date?.first ?? unknow
+        let time = date?.last?.filter({ char in char != "Z"}) ?? ""
+        let description = """
+            Artist: \(album.artist ?? unknow)
+            Album: \(album.name ?? unknow)
+            Release date: \(day) \(time)
+            Country: \(album.country ?? unknow)
+            """
+        return description
     }
 }

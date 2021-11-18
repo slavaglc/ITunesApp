@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F9835D1B27458B7100A86B14 /* AlbumDetailsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9835D1A27458B7100A86B14 /* AlbumDetailsModels.swift */; };
+		F9835D1E2746EE4D00A86B14 /* AdvancedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9835D1D2746EE4D00A86B14 /* AdvancedImageView.swift */; };
 		F9E5124E273EDC3200259B80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E5124D273EDC3200259B80 /* AppDelegate.swift */; };
 		F9E51250273EDC3200259B80 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E5124F273EDC3200259B80 /* SceneDelegate.swift */; };
 		F9E51257273EDC3300259B80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9E51256273EDC3300259B80 /* Assets.xcassets */; };
@@ -52,6 +53,7 @@
 
 /* Begin PBXFileReference section */
 		F9835D1A27458B7100A86B14 /* AlbumDetailsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailsModels.swift; sourceTree = "<group>"; };
+		F9835D1D2746EE4D00A86B14 /* AdvancedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedImageView.swift; sourceTree = "<group>"; };
 		F9E5124A273EDC3200259B80 /* ITunesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ITunesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9E5124D273EDC3200259B80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F9E5124F273EDC3200259B80 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +108,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F9835D1C2746EE3800A86B14 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				F9835D1D2746EE4D00A86B14 /* AdvancedImageView.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
 		F9E51241273EDC3200259B80 = {
 			isa = PBXGroup;
 			children = (
@@ -160,6 +170,7 @@
 			children = (
 				F9E5124D273EDC3200259B80 /* AppDelegate.swift */,
 				F9E5124F273EDC3200259B80 /* SceneDelegate.swift */,
+				F9835D1C2746EE3800A86B14 /* CustomViews */,
 				F9E51287273EF52D00259B80 /* Extensions */,
 				F9E5128F2740162B00259B80 /* Models */,
 				F9E51286273EF42900259B80 /* AlbumsList */,
@@ -376,6 +387,7 @@
 				F9E5127F273EE8D500259B80 /* AlbumListViewController.swift in Sources */,
 				F9E51289273EF5C700259B80 /* NSObject+ClassName.swift in Sources */,
 				F9E512912740164900259B80 /* Album.swift in Sources */,
+				F9835D1E2746EE4D00A86B14 /* AdvancedImageView.swift in Sources */,
 				F9E5129D2741881300259B80 /* AlbumDetailsPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
