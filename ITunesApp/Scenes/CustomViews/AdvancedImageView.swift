@@ -17,16 +17,18 @@ final class AdvancedImageView: UIImageView {
     func setImage(by url: URL, forKey key: Int) {
         if !ImageManager.shared.cacheContainsImage(at: key) {
             fetchImage(url: url, forKey: key) { image in
-                self.image = image
-                print("dowloaded image")
+                DispatchQueue.main.async {
+                    self.image = image
+                }
                 ImageManager.shared.saveImageDataToCache(with: image, forKey: key)
-                print("saved in cache")
             }
         } else {
             ImageManager.shared.getCachedImage(for: key) { image in
                 print("get from cache")
                 guard let image = image else { return }
-                self.image = image
+                DispatchQueue.main.async {
+                    self.image = image
+                }
             }
         }
     }

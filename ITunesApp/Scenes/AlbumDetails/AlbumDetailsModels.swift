@@ -16,7 +16,6 @@ enum AlbumDetails {
             let album: Album
         }
 
-        
         struct ViewModel {
             let description: String
             let albumViewModel: AlbumViewModel
