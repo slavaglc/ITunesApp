@@ -13,8 +13,11 @@ struct Album {
     let name: String?
     let artist: String?
     let imageURL: URL?
+    let imageURLHighResolution: URL?
     let releaseDate: String?
     let country: String?
+//    let lowResolutionKey: Int?
+//    let highResolutionKey: Int?
     
     init(by resultJSON: [String: Any]) {
         let album = resultJSON
@@ -31,11 +34,23 @@ struct Album {
         self.releaseDate = releaseDate
         self.country = country
         
+//        if let collectionId = collectionId {
+//            let hightResolutionKeyString = String(collectionId) + "600"
+//            highResolutionKey = Int(hightResolutionKeyString)
+//            let lowResolutionKeyString = String(collectionId) + "100"
+//            lowResolutionKey = Int(lowResolutionKeyString)
+//        } else {
+//            highResolutionKey = nil
+//            lowResolutionKey = nil
+//        }
+        
         if let imageURLString = imageURLString {
-            imageURL = URL(string: imageURLString)
+            let url = URL(string: imageURLString)
+            imageURL = url
+            self.imageURLHighResolution = ImageManager.shared.getHighResolutionImageURL(url: url)
         } else {
             imageURL = nil
+            self.imageURLHighResolution = nil
         }
-        
     }
 }

@@ -40,21 +40,35 @@ final class AlbumDetailsViewController: UIViewController {
         view.backgroundColor = .white
         albumImageView = createImageView()
         albumInfoLabel = createLabel()
+        let stackView = createStackView()
         guard let albumImageView = albumImageView else { return }
         guard let albumInfoLabel = albumInfoLabel else { return }
         let button = createButton()
+        stackView.addArrangedSubview(albumImageView)
+        stackView.addArrangedSubview(albumInfoLabel)
+        stackView.addArrangedSubview(button)
         
-        view.addSubview(albumImageView)
-        view.addSubview(albumInfoLabel)
-        view.addSubview(button)
-        setupSequentialConstraints(for: [albumImageView, albumInfoLabel, button])
+        view.addSubview(stackView)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        stackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10).isActive = true
+        stackView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        stackView.heightAnchor.constraint(equalToConstant: self.view.frame.height / 2).isActive = true
+//        view.addSubview(albumImageView)
+//        view.addSubview(albumInfoLabel)
+//        view.addSubview(button)
+//        setupSequentialConstraints(for: [albumImageView, albumInfoLabel, button])
     }
     
     
 //    MARK: - Creating UI Elements
     private func createImageView() -> AdvancedImageView {
         let imageView = AdvancedImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.backgroundColor = .yellow
+        imageView.heightAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
         return imageView
     }
     
@@ -64,21 +78,32 @@ final class AlbumDetailsViewController: UIViewController {
         label.text = "AlbumInfo"
         label.backgroundColor = .gray
             .withAlphaComponent(0.7)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.heightAnchor.constraint(equalToConstant: self.view.frame.width / 3).isActive = true
+        label.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
+        
         return label
     }
     
     private func createButton() -> UIButton {
-        let positionX = view.frame.midX
-        let positionY = view.frame.minY
-        let width = view.bounds.width
-        let height = width
-        let frame = CGRect(x: positionX, y: positionY, width: width, height: height)
-        let button = UIButton(frame: frame)
+        let button = UIButton()
         button.setTitle("Show song list", for: .normal)
         button.backgroundColor = .red
         button.tintColor = .white
         button.layer.cornerRadius = 10
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: self.view.frame.width / 3).isActive = true
+        button.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
         return button
+    }
+    
+    private func createStackView() -> UIStackView {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fillProportionally
+        stackView.alignment = .center
+        stackView.spacing = 10
+        return stackView
     }
     
     private func setupSequentialConstraints(for views: [UIView]) {
@@ -130,9 +155,9 @@ extension AlbumDetailsViewController: AlbumDetailsDisplayLogic {
      func displayAlbumInfo(viewModel: AlbumDetailsViewModel) {
         albumInfoLabel?.text = viewModel.description
         
-         guard let imageURL = viewModel.albumViewModel.imageURL else { return }
+         guard let imageURL = viewModel.albumViewModel.imageURLHighResolution else { return }
          
-         albumImageView?.setImage(by: imageURL, forKey: viewModel.albumViewModel.albumID)
+         albumImageView?.setImage(by: imageURL, forKey: viewModel.albumViewModel.highResolutionImageKey)
     }
     
 }

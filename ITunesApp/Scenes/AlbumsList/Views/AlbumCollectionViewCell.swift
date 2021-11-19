@@ -98,7 +98,7 @@ final class AlbumCollectionViewCell: UICollectionViewCell, CellModelRepresentabl
         artistLabel.text = viewModel.artist
         guard let imageURL = viewModel.imageURL else { return }
         
-        imageView.setImage(by: imageURL, forKey: viewModel.albumID)
+        imageView.setImage(by: imageURL, forKey: viewModel.lowResolutionImageKey)
 
     }
 }

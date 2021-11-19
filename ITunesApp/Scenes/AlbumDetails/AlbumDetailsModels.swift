@@ -22,11 +22,14 @@ enum AlbumDetails {
             
             struct AlbumViewModel {
                 let albumID: Int
+                let highResolutionImageKey: Int
                 let name: String
                 let artist: String
                 let releaseDate: String
                 let country: String
                 let imageURL: URL?
+                let imageURLHighResolution: URL?
+                
                 
                 init(album: Album) {
                     albumID = album.albumID ?? 0
@@ -35,6 +38,8 @@ enum AlbumDetails {
                     releaseDate = album.releaseDate ?? "Unknow date"
                     country = album.country ?? "Unknow country"
                     imageURL = album.imageURL
+                    imageURLHighResolution = album.imageURLHighResolution
+                    highResolutionImageKey = albumID + 600
                 }
             }
             
