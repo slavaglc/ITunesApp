@@ -21,10 +21,6 @@ final class AlbumListViewController: UICollectionViewController {
         super.viewDidLoad()
         setupNavigationBar()
         AlbumListConfigurator.shared.configure(with: self)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         getAlbums()
     }
     
@@ -47,9 +43,8 @@ final class AlbumListViewController: UICollectionViewController {
 extension AlbumListViewController: AlbumListDisplayLogic {
     func showAlbums(viewModel: AlbumList.PresentingAlbums.ViewModel) {
         items = viewModel.items
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-            self?.collectionView.reloadData()
-        }
+        collectionView.reloadData()
+        
     }
 }
 

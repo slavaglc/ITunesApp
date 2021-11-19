@@ -47,18 +47,15 @@ final class AlbumDetailsViewController: UIViewController {
         stackView.addArrangedSubview(albumImageView)
         stackView.addArrangedSubview(albumInfoLabel)
         stackView.addArrangedSubview(button)
-        
         view.addSubview(stackView)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        stackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10).isActive = true
-        stackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10).isActive = true
-        stackView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
-        stackView.heightAnchor.constraint(equalToConstant: self.view.frame.height / 1.5).isActive = true
-//        view.addSubview(albumImageView)
-//        view.addSubview(albumInfoLabel)
-//        view.addSubview(button)
-//        setupSequentialConstraints(for: [albumImageView, albumInfoLabel, button])
+        setConstraints(for: stackView)
+    }
+    
+    private func setConstraints(for view: UIView) {
+        view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10).isActive = true
+        view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10).isActive = true
+        view.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        view.heightAnchor.constraint(equalToConstant: self.view.frame.height / 1.3).isActive = true
     }
     
     
@@ -67,8 +64,9 @@ final class AlbumDetailsViewController: UIViewController {
         let imageView = AdvancedImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.backgroundColor = .yellow
-        imageView.heightAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: self.view.frame.height / 2).isActive = true
         imageView.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
+        
         return imageView
     }
     
@@ -100,9 +98,10 @@ final class AlbumDetailsViewController: UIViewController {
     private func createStackView() -> UIStackView {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.distribution = .fillProportionally
+//        stackView.distribution = .fillProportionally
         stackView.alignment = .center
         stackView.spacing = 10
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }
     

@@ -17,7 +17,7 @@ public final class NetworkManager {
     
     func fetchAlbumsData(completion: @escaping (_ albums: [Album])->()) {
         guard let url = URL(string: API) else { return }
-        
+        let mainGroup = DispatchGroup()
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data else {
                 print(error?.localizedDescription ?? "error")
@@ -27,9 +27,16 @@ public final class NetworkManager {
                 let json = try JSONSerialization.jsonObject(with: data, options: [])
                 guard let jsonDict = json as? [String : Any] else { return  print("error with getting json")}
                 guard let results = jsonDict["results"] as? Array<Any> else { return print("error with cast json as array")}
-                guard let albums = self.getModelByJSON(results: results) else { return }
-                completion(albums)
-//                print(results.count)
+                mainGroup.enter()
+                guard let albums = self.getModelByJSON(results: results) else { mainGroup.leave()
+                    return
+                }
+                mainGroup.leave()
+                
+                mainGroup.notify(queue: .main) {
+                    completion(albums)
+                }
+                
             } catch let error {
                 print(error.localizedDescription)
             }
