@@ -54,7 +54,7 @@ final class AlbumDetailsViewController: UIViewController {
         stackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10).isActive = true
         stackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10).isActive = true
         stackView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
-        stackView.heightAnchor.constraint(equalToConstant: self.view.frame.height / 2).isActive = true
+        stackView.heightAnchor.constraint(equalToConstant: self.view.frame.height / 1.5).isActive = true
 //        view.addSubview(albumImageView)
 //        view.addSubview(albumInfoLabel)
 //        view.addSubview(button)
@@ -92,7 +92,7 @@ final class AlbumDetailsViewController: UIViewController {
         button.tintColor = .white
         button.layer.cornerRadius = 10
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.heightAnchor.constraint(equalToConstant: self.view.frame.width / 3).isActive = true
+        button.heightAnchor.constraint(equalToConstant: self.view.frame.width / 7).isActive = true
         button.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
         return button
     }
@@ -106,42 +106,6 @@ final class AlbumDetailsViewController: UIViewController {
         return stackView
     }
     
-    private func setupSequentialConstraints(for views: [UIView]) {
-        let padding = 20.0
-        for (number, currentView) in views.enumerated() {
-
-
-            switch number {
-            case 0:
-                setupFirstConstarint()
-            default:
-                setupOtherConstraints()
-            }
-
-            func setupFirstConstarint() {
-                currentView.translatesAutoresizingMaskIntoConstraints = false
-                let verticalConstraint = currentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: padding)
-                let widthConstraint = currentView.widthAnchor.constraint(equalToConstant: view.bounds.width)
-                let heightConstraint = currentView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5)
-                
-                let centerConstraint = currentView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-                let leadingConstraint = currentView.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor, constant: padding)
-                let trailingConstraint = currentView.trailingAnchor.constraint(greaterThanOrEqualTo: view.trailingAnchor, constant: padding)
-
-                NSLayoutConstraint.activate([verticalConstraint, widthConstraint, heightConstraint, centerConstraint, leadingConstraint, trailingConstraint])
-            }
-
-            func setupOtherConstraints() {
-                currentView.translatesAutoresizingMaskIntoConstraints = false
-                let previousView = views[number - 1]
-                let verticalConstraint = currentView.topAnchor.constraint(equalTo: previousView.bottomAnchor, constant: padding)
-                let leadingConstraint = currentView.leadingAnchor.constraint(equalTo: previousView.leadingAnchor)
-                let trailingConstraints = currentView.trailingAnchor.constraint(equalTo: previousView.trailingAnchor)
-
-                NSLayoutConstraint.activate([verticalConstraint, trailingConstraints, leadingConstraint])
-            }
-        }
-    }
 //        MARK: - Configure Clean Swift pattern
     private func setup() {
         AlbumDetailsConfigurator.shared.configure(with: self)
