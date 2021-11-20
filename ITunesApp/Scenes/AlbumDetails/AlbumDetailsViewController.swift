@@ -8,6 +8,7 @@ import UIKit
 
 protocol AlbumDetailsDisplayLogic {
     func displayAlbumInfo(viewModel: AlbumDetailsViewModel)
+    func displaySongs(viewModel: SongsViewModel)
 }
 
 
@@ -19,14 +20,14 @@ final class AlbumDetailsViewController: UIViewController {
 //MARK: - UI Elements
     var albumInfoLabel: UILabel?
     var albumImageView: AdvancedImageView?
-    lazy var songListTableView: UITableView = { () -> UITableView in
-        let tableView = UITableView()
-            tableView.backgroundColor = .blue
-            tableView.translatesAutoresizingMaskIntoConstraints = false
-            tableView.heightAnchor.constraint(equalToConstant: self.view.frame.height / 2).isActive = true
-            tableView.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
-            return tableView
-    }()
+    var songListTableView = UITableView()
+    
+    private var rows: [SongCellIdentifiable] = []
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -38,11 +39,12 @@ final class AlbumDetailsViewController: UIViewController {
         setup()
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func loadView() {
+        super.loadView()
         setupLayout()
         interactor?.fetchAlbumData()
     }
+    
     
     private func setupLayout() {
         view.backgroundColor = .white
@@ -50,9 +52,12 @@ final class AlbumDetailsViewController: UIViewController {
         albumInfoLabel = createLabel()
         let albumInfoStackView = createStackView()
         
+        
         guard let albumImageView = albumImageView else { return }
         guard let albumInfoLabel = albumInfoLabel else { return }
         let button = createButton()
+        button.addTarget(self, action: #selector(getSongs), for: .touchUpInside)
+        
         albumImageView.isHidden = true
         albumInfoLabel.isHidden = true
         albumInfoStackView.addArrangedSubview(albumImageView)
@@ -61,7 +66,17 @@ final class AlbumDetailsViewController: UIViewController {
         albumInfoStackView.addArrangedSubview(button)
         
         view.addSubview(albumInfoStackView)
+        setPramsForTableView(tableView: songListTableView)
         setConstraints(for: albumInfoStackView)
+    }
+    
+    private func setPramsForTableView(tableView: UITableView) {
+        tableView.backgroundColor = .yellow
+        
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.heightAnchor.constraint(equalToConstant: self.view.frame.height / 2).isActive = true
+        tableView.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
+        tableView.separatorStyle = .none
     }
     
     private func setConstraints(for view: UIView) {
@@ -70,6 +85,10 @@ final class AlbumDetailsViewController: UIViewController {
         view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -padding).isActive = true
         view.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
         view.heightAnchor.constraint(equalToConstant: self.view.frame.height / 1.3).isActive = true
+    }
+    
+    @objc private func getSongs() {
+        interactor?.fetchSongList()
     }
     
     
@@ -112,7 +131,6 @@ final class AlbumDetailsViewController: UIViewController {
     private func createStackView() -> UIStackView {
         let stackView = UIStackView()
         stackView.axis = .vertical
-//        stackView.distribution = .fillProportionally
         stackView.alignment = .center
         stackView.spacing = 10
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -137,7 +155,7 @@ final class AlbumDetailsViewController: UIViewController {
 
 //      MARK: - Display Logic
 extension AlbumDetailsViewController: AlbumDetailsDisplayLogic {
-  
+    
      func displayAlbumInfo(viewModel: AlbumDetailsViewModel) {
         albumInfoLabel?.text = viewModel.description
         
@@ -146,16 +164,30 @@ extension AlbumDetailsViewController: AlbumDetailsDisplayLogic {
          albumImageView?.setImage(by: imageURL, forKey: viewModel.albumViewModel.highResolutionImageKey)
     }
     
+    func displaySongs(viewModel: SongsViewModel) {
+        rows = viewModel.rows
+        songListTableView.reloadData()
+    }
+    
 }
 // MARK: - TableView functions
 extension AlbumDetailsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        0
+        rows.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cellViewModel = rows[indexPath.row]
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellViewModel.identifier, for: indexPath) as? SongTableViewCell else { return UITableViewCell() }
+        cell.viewModel = cellViewModel
+        return cell
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let cellViewModel = rows[indexPath.row]
+        return CGFloat(cellViewModel.height + 5)
+    }
+    
+ 
     
 }

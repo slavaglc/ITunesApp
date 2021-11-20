@@ -30,23 +30,13 @@ final class AlbumDetailsInteractor: AlbumDetailsDataStore, AlbumDetailsBusinessL
         presenter?.presentAlbumInfo(response: response)
     }
     
-//    func fetchAlbumImage() {
-//        guard let album = album else { return }
-//        guard let url = album.imageURL else { return }
-//        ImageManager.shared.fetchImage(url: url) { [weak self] imageData, error in
-//
-//            if let error = error {
-//                print(error.localizedDescription)
-//            } else if let imageData = imageData {
-//                let response = AlbumDetails.PresentingAlbum.ImageResponse(imageData: imageData)
-//                self?.presenter?.presentAlbumImage(response: response)
-//            }
-//        }
-//    }
-    
-    
+
     func fetchSongList() {
-         
+        guard let album = album else { return }
+        NetworkManager.shared.fetchSongsData(by: album.albumID) { [weak self] songs in
+            let response = AlbumDetails.PresentingSongs.Response.init(songs: songs)
+            self?.presenter?.presentSongList(response: response)
+        }
     }
     
    

@@ -13,6 +13,8 @@ final class AlbumDetailsConfigurator {
 
     static let shared = AlbumDetailsConfigurator()
     
+    private init() {}
+    
    public func configure(with viewController: AlbumDetailsViewController) {
        let interactor = AlbumDetailsInteractor()
        let presenter = AlbumDetailsPresenter()
@@ -20,11 +22,15 @@ final class AlbumDetailsConfigurator {
        viewController.interactor = interactor
        viewController.router = router
        viewController.songListTableView.delegate = viewController
+       viewController.songListTableView.dataSource = viewController
+       viewController.songListTableView.register(SongTableViewCell.self, forCellReuseIdentifier: SongTableViewCell.nameOfClass)
        interactor.presenter = presenter
        presenter.viewController = viewController
        router.viewController = viewController
        router.dataStore = interactor
        
+       
+      
     }
     
 }

@@ -11,6 +11,7 @@ import Foundation
 
 protocol AlbumDetailsPresentingLogic {
     func presentAlbumInfo(response: AlbumDetails.PresentingAlbum.Response)
+    func presentSongList(response: AlbumDetails.PresentingSongs.Response)
 }
 
 final class AlbumDetailsPresenter: AlbumDetailsPresentingLogic {
@@ -24,7 +25,15 @@ final class AlbumDetailsPresenter: AlbumDetailsPresentingLogic {
         viewController?.displayAlbumInfo(viewModel: albumDetailsViewModel)
     }
     
-    
+    func presentSongList(response: AlbumDetails.PresentingSongs.Response) {
+        let songs = response.songs
+        var rows: [SongCellViewModel] = []
+        songs.forEach { song in
+            rows.append(SongCellViewModel.init(song: song))
+        }
+        let viewModel = SongsViewModel.init(rows: rows)
+        viewController?.displaySongs(viewModel: viewModel)
+    }
     
     private func getDescription(for response: AlbumDetails.PresentingAlbum.Response) -> String {
         let album = response.album

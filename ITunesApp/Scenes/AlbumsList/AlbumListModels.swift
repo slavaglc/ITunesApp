@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol CellIdentifiable {
+protocol AlbumCellIdentifiable {
     var identifier: String { get }
     var height: Double { get }
     var width: Double { get }
@@ -23,7 +23,7 @@ enum AlbumList {
         }
         
         struct ViewModel {
-            struct AlbumCellViewModel: CellIdentifiable {
+            struct AlbumCellViewModel: AlbumCellIdentifiable {
                 var name: String
                 var artist: String
                 var imageURL: URL?

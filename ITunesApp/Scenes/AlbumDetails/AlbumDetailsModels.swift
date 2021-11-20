@@ -8,7 +8,14 @@
 import Foundation
 
 
+protocol SongCellIdentifiable {
+    var identifier: String { get }
+    var height: Int { get }
+}
+
 typealias AlbumDetailsViewModel = AlbumDetails.PresentingAlbum.ViewModel
+typealias SongsViewModel = AlbumDetails.PresentingSongs.ViewModel
+typealias SongCellViewModel = AlbumDetails.PresentingSongs.ViewModel.SongCellViewModel
 
 enum AlbumDetails {
     enum PresentingAlbum {
@@ -48,8 +55,34 @@ enum AlbumDetails {
     
     enum PresentingSongs {
         struct Response {
+            let songs: [Song]
+        }
+        
+        struct ViewModel {
+            let rows: [SongCellViewModel]
             
+            struct SongCellViewModel: SongCellIdentifiable {
+                
+                let trackName: String
+                let trackMills: Int
+                let minutes: Int
+                let restOfSeconds: Int
+                var identifier: String {
+                    SongTableViewCell.nameOfClass
+                }
+                
+                var height: Int {
+                    50
+                }
+                
+                
+                init(song: Song) {
+                    trackName = song.trackName ?? "Unknow track name"
+                    trackMills = song.trackTimeMillis ?? 0
+                    restOfSeconds = (trackMills / 1000) % 60
+                    minutes = (trackMills / (1000 * 60)) % 60
+                }
+            }
         }
     }
-    
 }

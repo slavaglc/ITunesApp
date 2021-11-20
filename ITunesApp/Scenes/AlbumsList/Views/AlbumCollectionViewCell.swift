@@ -9,7 +9,7 @@ import UIKit
 
 
 protocol CellModelRepresentable {
-    var viewModel: CellIdentifiable? {get set}
+    var viewModel: AlbumCellIdentifiable? {get set}
 }
 
 final class AlbumCollectionViewCell: UICollectionViewCell, CellModelRepresentable {
@@ -18,7 +18,7 @@ final class AlbumCollectionViewCell: UICollectionViewCell, CellModelRepresentabl
     private let nameLabel = UILabel()
     private let artistLabel = UILabel()
     
-    var viewModel: CellIdentifiable? {
+    var viewModel: AlbumCellIdentifiable? {
         didSet{
             updateView()
         }

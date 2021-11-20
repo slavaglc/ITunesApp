@@ -15,7 +15,7 @@ protocol AlbumListDisplayLogic {
 final class AlbumListViewController: UICollectionViewController {
     var interactor: AlbumListBusinessLogic?
     var router: AlbumListRoutingLogic?
-    private var items: [CellIdentifiable] = []
+    private var items: [AlbumCellIdentifiable] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()

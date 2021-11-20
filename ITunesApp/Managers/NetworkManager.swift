@@ -29,9 +29,7 @@ public final class NetworkManager {
                 guard let jsonDict = json as? [String : Any] else { return  print("error with getting  album json")}
                 guard let results = jsonDict["results"] as? Array<Any> else { return print("error with cast json as array")}
                 mainGroup.enter()
-                guard let albums = self.getAlbumArrayByJSON(results: results) else { mainGroup.leave()
-                    return
-                }
+                guard let albums = self.getAlbumArrayByJSON(results: results) else { return }
                 mainGroup.leave()
                 
                 mainGroup.notify(queue: .main) {
@@ -45,8 +43,9 @@ public final class NetworkManager {
         }.resume()
     }
     
-    func fetchSongsData(by albumID: Int, completion: @escaping ([Song]?)->()) {
+    func fetchSongsData(by albumID: Int, completion: @escaping ([Song])->()) {
         guard let url = getSongListQueryURL(albumID: albumID) else { return print("bad request")}
+        
         let mainGroup = DispatchGroup()
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data else { return print(error?.localizedDescription ?? "error with getting songs") }
@@ -54,9 +53,13 @@ public final class NetworkManager {
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: [])
                 guard let jsonDict = json as? [String: Any] else { return print("error with parse song JSON") }
+                
                 guard  let results = jsonDict["results"] as? Array<Any> else { return }
                 mainGroup.enter()
-                guard let songs = self.getSongArrayByJSON(results: results) else { return mainGroup.leave()}
+                guard let songs = self.getSongArrayByJSON(results: results) else {
+                    
+                    return }
+                
                 mainGroup.leave()
                 
                 mainGroup.notify(queue: .main) {
@@ -67,7 +70,7 @@ public final class NetworkManager {
             } catch let error {
                 print(error.localizedDescription)
             }
-        }
+        }.resume()
     }
     
     
@@ -97,8 +100,10 @@ public final class NetworkManager {
     
     private func getSongArrayByJSON(results: Array<Any>) -> [Song]? {
         var songs: [Song] = []
-        results.forEach { song in
-            guard let song = song as? [String: Any] else { return }
+        for song in results {
+            guard let song = song as? [String: Any] else { continue }
+            guard let wrapperType = song["wrapperType"] as? String else { continue }
+            guard wrapperType != "collection" else { continue }
             let songObject = Song(by: song)
             songs.append(songObject)
         }
