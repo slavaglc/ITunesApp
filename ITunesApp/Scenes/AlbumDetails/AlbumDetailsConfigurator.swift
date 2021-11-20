@@ -19,10 +19,12 @@ final class AlbumDetailsConfigurator {
        let router = AlbumDetailsRouter()
        viewController.interactor = interactor
        viewController.router = router
+       viewController.songListTableView.delegate = viewController
        interactor.presenter = presenter
        presenter.viewController = viewController
        router.viewController = viewController
        router.dataStore = interactor
+       
     }
     
 }

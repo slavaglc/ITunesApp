@@ -19,6 +19,14 @@ final class AlbumDetailsViewController: UIViewController {
 //MARK: - UI Elements
     var albumInfoLabel: UILabel?
     var albumImageView: AdvancedImageView?
+    lazy var songListTableView: UITableView = { () -> UITableView in
+        let tableView = UITableView()
+            tableView.backgroundColor = .blue
+            tableView.translatesAutoresizingMaskIntoConstraints = false
+            tableView.heightAnchor.constraint(equalToConstant: self.view.frame.height / 2).isActive = true
+            tableView.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
+            return tableView
+    }()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -40,20 +48,26 @@ final class AlbumDetailsViewController: UIViewController {
         view.backgroundColor = .white
         albumImageView = createImageView()
         albumInfoLabel = createLabel()
-        let stackView = createStackView()
+        let albumInfoStackView = createStackView()
+        
         guard let albumImageView = albumImageView else { return }
         guard let albumInfoLabel = albumInfoLabel else { return }
         let button = createButton()
-        stackView.addArrangedSubview(albumImageView)
-        stackView.addArrangedSubview(albumInfoLabel)
-        stackView.addArrangedSubview(button)
-        view.addSubview(stackView)
-        setConstraints(for: stackView)
+        albumImageView.isHidden = true
+        albumInfoLabel.isHidden = true
+        albumInfoStackView.addArrangedSubview(albumImageView)
+        albumInfoStackView.addArrangedSubview(albumInfoLabel)
+        albumInfoStackView.addArrangedSubview(songListTableView)
+        albumInfoStackView.addArrangedSubview(button)
+        
+        view.addSubview(albumInfoStackView)
+        setConstraints(for: albumInfoStackView)
     }
     
     private func setConstraints(for view: UIView) {
-        view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10).isActive = true
-        view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10).isActive = true
+        let padding = 10.0
+        view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: padding).isActive = true
+        view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -padding).isActive = true
         view.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
         view.heightAnchor.constraint(equalToConstant: self.view.frame.height / 1.3).isActive = true
     }
@@ -105,6 +119,15 @@ final class AlbumDetailsViewController: UIViewController {
         return stackView
     }
     
+    private func createTableView() -> UITableView {
+        let tableView = UITableView()
+        tableView.backgroundColor = .blue
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.heightAnchor.constraint(equalToConstant: self.view.frame.height / 2).isActive = true
+        tableView.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
+        return tableView
+    }
+    
 //        MARK: - Configure Clean Swift pattern
     private func setup() {
         AlbumDetailsConfigurator.shared.configure(with: self)
@@ -122,5 +145,17 @@ extension AlbumDetailsViewController: AlbumDetailsDisplayLogic {
          
          albumImageView?.setImage(by: imageURL, forKey: viewModel.albumViewModel.highResolutionImageKey)
     }
+    
+}
+// MARK: - TableView functions
+extension AlbumDetailsViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+    
     
 }
