@@ -38,14 +38,16 @@ final class AlbumCollectionViewCell: UICollectionViewCell, CellModelRepresentabl
         super.layoutSubviews()
         
         imageView.frame = self.contentView.frame
-
+        
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        
         if viewModel != nil {
             viewModel = nil
+            imageView.image = nil
+            nameLabel.text?.removeAll()
+            artistLabel.text?.removeAll()
         }
     }
     
@@ -62,7 +64,7 @@ final class AlbumCollectionViewCell: UICollectionViewCell, CellModelRepresentabl
         addSubview(artistLabel)
     }
     
-  
+    
     private func setupNameLabelLayout() {
         let labelWidth = self.contentView.frame.width
         let labelHeight = nameLabel.font.lineHeight * 1.5
@@ -84,7 +86,7 @@ final class AlbumCollectionViewCell: UICollectionViewCell, CellModelRepresentabl
         let labelPositionY = self.contentView.bounds.minY
         artistLabel.frame = CGRect(x: labelPositionX, y: labelPositionY, width: labelWidth, height: labelHeight)
         
-        artistLabel.backgroundColor = .white
+        artistLabel.backgroundColor = .lightGray
             .withAlphaComponent(0.7)
         artistLabel.textAlignment = .center
         
@@ -98,6 +100,6 @@ final class AlbumCollectionViewCell: UICollectionViewCell, CellModelRepresentabl
         guard let imageURL = viewModel.imageURL else { return }
         
         imageView.setImage(by: imageURL, forKey: viewModel.lowResolutionImageKey)
-
+        
     }
 }

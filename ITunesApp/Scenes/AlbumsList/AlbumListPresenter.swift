@@ -24,7 +24,7 @@ extension AlbumListPresenter: AlbumListPresentationLogic {
         response.albums.forEach { album in
             items.append(AlbumCellViewModel(album: album))
         }
-        
+                
         let viewModel = AlbumList.PresentingAlbums.ViewModel.init(items: items)
         viewController?.showAlbums(viewModel: viewModel)
     }

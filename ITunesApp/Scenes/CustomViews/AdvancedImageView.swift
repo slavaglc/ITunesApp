@@ -15,6 +15,7 @@ final class AdvancedImageView: UIImageView {
     override func layoutSubviews() {
         super.layoutSubviews()
         activityIndicator.center = self.center
+        activityIndicator.color = .black
     }
     
     func setImage(image: UIImage) {
@@ -35,17 +36,16 @@ final class AdvancedImageView: UIImageView {
             fetchImage(url: url, forKey: key) { image in
                 DispatchQueue.main.async { [weak self] in
                     self?.image = image
-                    self?.moveInFromZero()
+                    self?.fadeIn()
                     completion()
                 }
                 ImageManager.shared.saveImageDataToCache(with: image, forKey: key)
             }
         } else {
             ImageManager.shared.getCachedImage(for: key) { image in
-                print("get from cache")
                 guard let image = image else { return }
-                DispatchQueue.main.async {
-                    self.image = image
+                DispatchQueue.main.async { [weak self] in
+                    self?.image = image
                     completion()
                 }
             }

@@ -16,6 +16,7 @@ struct Album {
     let imageURLHighResolution: URL?
     let releaseDate: String?
     let country: String?
+    let trackCount: Int?
 //    let lowResolutionKey: Int?
 //    let highResolutionKey: Int?
     
@@ -27,22 +28,15 @@ struct Album {
         let collectionId = album["collectionId"] as? Int
         let releaseDate = album["releaseDate"] as? String
         let country = album["country"] as? String
+        let trackCount = album["trackCount"] as? Int
         
         name = albumName
         artist = artistName
         albumID = collectionId ?? 0
         self.releaseDate = releaseDate
         self.country = country
+        self.trackCount = trackCount
         
-//        if let collectionId = collectionId {
-//            let hightResolutionKeyString = String(collectionId) + "600"
-//            highResolutionKey = Int(hightResolutionKeyString)
-//            let lowResolutionKeyString = String(collectionId) + "100"
-//            lowResolutionKey = Int(lowResolutionKeyString)
-//        } else {
-//            highResolutionKey = nil
-//            lowResolutionKey = nil
-//        }
         
         if let imageURLString = imageURLString {
             let url = URL(string: imageURLString)

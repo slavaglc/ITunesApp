@@ -23,14 +23,14 @@ final class SongTableViewCell: UITableViewCell, SongTableViewCellRepresentable {
     lazy var trackNameLabel: UILabel  = {()-> UILabel in
         let label = UILabel()
         label.text = "Song"
-        label.tintColor = .black
+        label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     lazy var trackMillsLabel: UILabel = { ()-> UILabel in
         let label = UILabel()
-        label.tintColor = .lightGray
+        label.textColor = .lightGray
         label.font = UIFont(name: "Avenir-Light", size: 10)
         label.textAlignment = .right
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -68,5 +68,4 @@ final class SongTableViewCell: UITableViewCell, SongTableViewCellRepresentable {
         trackMillsLabel.text = "\(Int(viewModel.minutes)):\(secondFormatted)"
         
     }
-    
 }

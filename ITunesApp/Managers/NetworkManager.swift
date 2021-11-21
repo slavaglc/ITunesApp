@@ -8,17 +8,25 @@
 import Foundation
 
 
+
 public final class NetworkManager {
     
     static let shared = NetworkManager()
-    private let API =  "https://itunes.apple.com/search?term=billy+talent&entity=album"
     private let host = "itunes.apple.com"
+    private let limitOfAlbums = 200
+    private var lastRequestTime = 0
     
     private init() {}
     
-    func fetchAlbumsData(completion: @escaping (_ albums: [Album])->()) {
-        guard let url = URL(string: API) else { return }
+    func fetchAlbumsData(for searchType: SearchingType, completion: @escaping (_ albums: [Album])->()) {
+        
+        lastRequestTime = getCurrentTime()
+        let requestTime = lastRequestTime
+        
+        
+        guard let url = getSearchQueryURL(for: searchType) else { return }
         let mainGroup = DispatchGroup()
+        guard requestTime == lastRequestTime else { return }
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data else {
                 print(error?.localizedDescription ?? "error")
@@ -32,7 +40,8 @@ public final class NetworkManager {
                 guard let albums = self.getAlbumArrayByJSON(results: results) else { return }
                 mainGroup.leave()
                 
-                mainGroup.notify(queue: .main) {
+                mainGroup.notify(queue: .main) { [weak self] in
+                    guard self?.lastRequestTime == requestTime else { return }
                     completion(albums)
                 }
                 
@@ -66,13 +75,33 @@ public final class NetworkManager {
                     completion(songs)
                 }
                 
-                
             } catch let error {
                 print(error.localizedDescription)
             }
         }.resume()
     }
     
+    private func getSearchQueryURL(for searchType: SearchingType) -> URL? {
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = host
+        components.path = "/search"
+        
+        switch searchType {
+        case .random:
+            components.queryItems = [
+                URLQueryItem(name: "term", value: getRandomChar())
+            ]
+        case .searchingFor(let searchText):
+            let searchText = getFormattedQueryString(string: searchText)
+            components.queryItems = [
+                URLQueryItem(name: "term", value: searchText)
+            ]
+        }
+        components.queryItems?.append(URLQueryItem(name: "entity", value: "album"))
+        components.queryItems?.append(URLQueryItem(name: "limit", value: "\(limitOfAlbums)"))
+        return components.url
+    }
     
     private func getSongListQueryURL(albumID: Int) -> URL? {
         let albumIDString = String(albumID)
@@ -108,5 +137,23 @@ public final class NetworkManager {
             songs.append(songObject)
         }
         return songs
+    }
+    
+    private func getFormattedQueryString(string: String) -> String {
+        string.replacingOccurrences(of: " ", with: "+")
+    }
+    
+    private func getCurrentTime() -> Int {
+        let date = Date()
+        let calendar = Calendar.current
+        let nanosecond = calendar.component(.nanosecond, from: date)
+        return nanosecond
+    }
+    
+    private func getRandomChar() -> String {
+        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        guard let result = letters.randomElement() else { return "a" }
+        let resultString = String(result)
+        return resultString
     }
 }

@@ -12,6 +12,7 @@
 		F9835D202748EC1800A86B14 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9835D1F2748EC1800A86B14 /* Song.swift */; };
 		F9835D23274909F900A86B14 /* SongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9835D22274909F900A86B14 /* SongTableViewCell.swift */; };
 		F9835D2527498E6E00A86B14 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9835D2427498E6E00A86B14 /* UIExtensions.swift */; };
+		F9835D27274A4EF000A86B14 /* StateModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9835D26274A4EF000A86B14 /* StateModels.swift */; };
 		F9E5124E273EDC3200259B80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E5124D273EDC3200259B80 /* AppDelegate.swift */; };
 		F9E51250273EDC3200259B80 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E5124F273EDC3200259B80 /* SceneDelegate.swift */; };
 		F9E51257273EDC3300259B80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9E51256273EDC3300259B80 /* Assets.xcassets */; };
@@ -60,6 +61,7 @@
 		F9835D1F2748EC1800A86B14 /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
 		F9835D22274909F900A86B14 /* SongTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; };
 		F9835D2427498E6E00A86B14 /* UIExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
+		F9835D26274A4EF000A86B14 /* StateModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateModels.swift; sourceTree = "<group>"; };
 		F9E5124A273EDC3200259B80 /* ITunesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ITunesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9E5124D273EDC3200259B80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F9E5124F273EDC3200259B80 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 			children = (
 				F9E512902740164900259B80 /* Album.swift */,
 				F9835D1F2748EC1800A86B14 /* Song.swift */,
+				F9835D26274A4EF000A86B14 /* StateModels.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9835D202748EC1800A86B14 /* Song.swift in Sources */,
+				F9835D27274A4EF000A86B14 /* StateModels.swift in Sources */,
 				F9E512A12741894B00259B80 /* AlbumListRouter.swift in Sources */,
 				F9E5128C2740141C00259B80 /* AlbumCollectionViewCell.swift in Sources */,
 				F9E51283273EEDE100259B80 /* AlbumListPresenter.swift in Sources */,

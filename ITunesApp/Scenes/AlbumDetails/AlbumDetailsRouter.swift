@@ -21,5 +21,5 @@ final class AlbumDetailsRouter: NSObject, AlbumDetailsDataPassing, AlbumDetailsR
     
     var viewController: AlbumDetailsDisplayLogic?
     var dataStore: AlbumDetailsDataStore?
-
+    
 }

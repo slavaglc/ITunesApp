@@ -40,6 +40,4 @@ final class AlbumListRouter: AlbumListRoutingLogic, AlbumListDataPassing {
         guard let selectedIndex = viewController?.collectionView.indexPathsForSelectedItems?.first  else { return }
         destination.album = source.albums[selectedIndex.item]
     }
-
-    
 }

@@ -22,7 +22,7 @@ enum AlbumDetails {
         struct Response {
             let album: Album
         }
-
+        
         struct ViewModel {
             let description: String
             let albumViewModel: AlbumViewModel
@@ -34,6 +34,7 @@ enum AlbumDetails {
                 let artist: String
                 let releaseDate: String
                 let country: String
+                let trackCount: Int
                 let imageURL: URL?
                 let imageURLHighResolution: URL?
                 
@@ -44,6 +45,7 @@ enum AlbumDetails {
                     artist = album.artist ?? "Unknow artist"
                     releaseDate = album.releaseDate ?? "Unknow date"
                     country = album.country ?? "Unknow country"
+                    trackCount = album.trackCount ?? 0
                     imageURL = album.imageURL
                     imageURLHighResolution = album.imageURLHighResolution
                     highResolutionImageKey = albumID + 600

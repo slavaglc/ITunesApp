@@ -44,6 +44,7 @@ final class AlbumDetailsPresenter: AlbumDetailsPresentingLogic {
         let description = """
             Artist: \(album.artist ?? unknow)
             Album: \(album.name ?? unknow)
+            Track count: \(album.trackCount ?? 0)
             Release date: \(day) \(time)
             Country: \(album.country ?? unknow)
             """

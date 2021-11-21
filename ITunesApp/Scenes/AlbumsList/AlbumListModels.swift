@@ -9,8 +9,6 @@ import Foundation
 
 protocol AlbumCellIdentifiable {
     var identifier: String { get }
-    var height: Double { get }
-    var width: Double { get }
 }
 
 typealias AlbumCellViewModel = AlbumList.PresentingAlbums.ViewModel.AlbumCellViewModel
@@ -32,14 +30,6 @@ enum AlbumList {
                 
                 var identifier: String {
                     AlbumCollectionViewCell.nameOfClass
-                }
-                
-                var height: Double {
-                    100
-                }
-                
-                var width: Double {
-                    100
                 }
                 
                 init(album: Album) {

@@ -35,6 +35,7 @@ final class AlbumDetailsViewController: UIViewController {
     private let showButton = UIButton()
     private let activityIndicator = UIActivityIndicatorView(style: .large)
     
+    
     private var rows: [SongCellIdentifiable] = []
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -56,7 +57,6 @@ final class AlbumDetailsViewController: UIViewController {
     @objc private func showButtonTapped(sender: UIButton) {
         sender.backgroundColor = #colorLiteral(red: 0.7630645037, green: 0.1636582017, blue: 0.05129658431, alpha: 1)
         sender.tintColor = .white
-        
         
         switch showButtonType {
         case .showSongList:
@@ -92,7 +92,6 @@ final class AlbumDetailsViewController: UIViewController {
     
     private func getSongList() {
         songListTableView.addSubview(activityIndicator)
-        activityIndicator.center = view.center
         activityIndicator.startAnimating()
         interactor?.fetchSongList()
     }
@@ -101,8 +100,10 @@ final class AlbumDetailsViewController: UIViewController {
     
     private func setupLayout() {
         view.backgroundColor = .white
+        setActivityIndicatorParameters(activityIndicator: activityIndicator)
         songListTableView.addSubview(activityIndicator)
-       
+        
+        
         let albumInfoStackView = createStackView()
         setImageViewParameters(imageView: albumImageView)
         setLabelParameters(label: albumInfoLabel)
@@ -121,6 +122,7 @@ final class AlbumDetailsViewController: UIViewController {
     
     private func setTableViewParameters(tableView: UITableView) {
         tableView.isHidden = true
+        tableView.backgroundColor = .white
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.heightAnchor.constraint(equalToConstant: self.view.frame.height / 2).isActive = true
         tableView.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
@@ -141,9 +143,17 @@ final class AlbumDetailsViewController: UIViewController {
         imageView.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
     }
     
+    private func setActivityIndicatorParameters(activityIndicator: UIActivityIndicatorView) {
+        let navigationBarHeight = navigationController?.navigationBar.frame.height ?? view.frame.height
+        let positionY = view.frame.midY - navigationBarHeight
+        activityIndicator.center = CGPoint(x: view.frame.midX, y: positionY)
+        activityIndicator.color = .black
+    }
+    
     private func setLabelParameters(label: UILabel) {
         label.numberOfLines = 0
         label.text = "AlbumInfo"
+        label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         label.heightAnchor.constraint(equalToConstant: self.view.frame.width / 3).isActive = true
         label.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true

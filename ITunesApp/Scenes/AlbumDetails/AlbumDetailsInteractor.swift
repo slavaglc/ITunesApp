@@ -30,7 +30,7 @@ final class AlbumDetailsInteractor: AlbumDetailsDataStore, AlbumDetailsBusinessL
         presenter?.presentAlbumInfo(response: response)
     }
     
-
+    
     func fetchSongList() {
         guard let album = album else { return }
         NetworkManager.shared.fetchSongsData(by: album.albumID) { [weak self] songs in
@@ -38,8 +38,6 @@ final class AlbumDetailsInteractor: AlbumDetailsDataStore, AlbumDetailsBusinessL
             self?.presenter?.presentSongList(response: response)
         }
     }
-    
-   
 }
 
 

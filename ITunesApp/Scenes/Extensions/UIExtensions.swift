@@ -31,6 +31,56 @@ extension UIView {
         }
     }
     
+    func moveOut(completionHandler: @escaping ()->() = {}) {
+        
+        transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        alpha = 1.0
+        
+        UIView.animate(withDuration: 0.2) {
+            self.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+            self.alpha = 0.0
+        } completion: { isFinished in
+            self.isHidden = isFinished
+            if isFinished {
+                completionHandler()
+            }
+        }
+    }
+    
+    func fadeIn() {
+        alpha = 0.0
+        isHidden = false
+        
+        UIView.animate(withDuration: 0.5) {
+            self.alpha = 1.0
+        }
+    }
+    
+    func fadeIn(completionHandler: @escaping ()->() = {}) {
+        alpha = 0.0
+        isHidden = false
+        UIView.animate(withDuration: 0.2) {
+            self.alpha = 1.0
+        } completion: { isFinished in
+            if isFinished {
+                completionHandler()
+            }
+        }
+    }
+    
+    func fadeOut(completionHandler: @escaping ()->() = {}) {
+        alpha = 1.0
+    
+        UIView.animate(withDuration: 0.2) {
+            self.alpha = 0.0
+        } completion: { isFinished in
+            self.isHidden = isFinished
+            if isFinished {
+                completionHandler()
+            }
+        }
+    }
+    
     func fadeInFromLeftSide(completionAnimation: @escaping ()->() = {}) {
         let targetCenter = center
         center = CGPoint(x: 0, y: targetCenter.y)
@@ -49,13 +99,15 @@ extension UIView {
     func fadeOutToLeftSide(completionAnimation: @escaping ()->() = {}) {
         let targetCenter = center
         center = CGPoint(x: targetCenter.x, y: targetCenter.y)
-        alpha = 0.0
+        alpha = 1.0
         isHidden = false
         UIView.animate(withDuration: 0.3) { [weak self] in
             self?.center = CGPoint(x: 0, y: targetCenter.y)
-            self?.alpha = 1.0
-        } completion: { isFinished in
+            self?.alpha = 0.0
+        } completion: { [weak self] isFinished in
             if isFinished {
+                self?.isHidden = true
+                self?.center = targetCenter
                 completionAnimation()
             }
         }
@@ -79,51 +131,16 @@ extension UIView {
     func fadeOutToRightSide(completionAnimation: @escaping ()->() = {}) {
         let targetCenter = center
         center = CGPoint(x: 0, y: targetCenter.y)
-        alpha = 0.0
+        alpha = 1.0
         isHidden = false
         UIView.animate(withDuration: 0.3) { [weak self] in
             guard let target = self else { return }
             self?.center = CGPoint(x: target.frame.maxX, y: targetCenter.y)
-            self?.alpha = 1.0
+            self?.alpha = 0.0
         } completion: { isFinished in
             if isFinished {
                 completionAnimation()
             }
         }
-    }
-    
-    func moveOut(completionHandler: @escaping ()->() = {}) {
-    
-        transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-        alpha = 1.0
-        
-        UIView.animate(withDuration: 0.2) {
-            self.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
-            self.alpha = 0.0
-        } completion: { isFinished in
-            self.isHidden = isFinished
-            if isFinished {
-            completionHandler()
-            }
-        }
-}
-    
-    func moveOut(completion: ()->()) {
-        moveOut()
-        completion()
-    }
-    
-}
-
-extension UIViewController {
-    func showActivityIndicator(target: UIViewController, style: UIActivityIndicatorView.Style = .medium, completion: (UIActivityIndicatorView)->()) {
-        let activityIndicator = UIActivityIndicatorView(style: style)
-        activityIndicator.center = target.view.center
-        if let viewController = navigationController {
-            viewController.view.addSubview(activityIndicator)
-        } else {
-            target.view.addSubview(activityIndicator)
-        }
-        completion(activityIndicator)
     }
 }
