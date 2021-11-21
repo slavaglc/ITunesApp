@@ -56,7 +56,6 @@ final class AlbumCollectionViewCell: UICollectionViewCell, CellModelRepresentabl
     }
     
     private func initialize() {
-        backgroundColor = .yellow
         imageView.contentMode = .scaleToFill
         addSubview(imageView)
         addSubview(nameLabel)

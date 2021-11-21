@@ -72,7 +72,7 @@ enum AlbumDetails {
                 }
                 
                 var height: Int {
-                    50
+                    55
                 }
                 
                 
@@ -85,4 +85,9 @@ enum AlbumDetails {
             }
         }
     }
+}
+
+enum ShowButtonType: String {
+    case showSongList = "Show song list"
+    case showAlbumInfo = "Show album info"
 }

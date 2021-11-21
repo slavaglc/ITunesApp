@@ -24,6 +24,7 @@ final class AlbumListViewController: UICollectionViewController {
         getAlbums()
     }
     
+
     private func setupNavigationBar() {
             let navBarAppearance = UINavigationBarAppearance()
             navBarAppearance.configureWithOpaqueBackground()

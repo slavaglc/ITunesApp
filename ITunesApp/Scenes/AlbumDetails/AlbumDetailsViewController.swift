@@ -7,27 +7,35 @@
 import UIKit
 
 protocol AlbumDetailsDisplayLogic {
+    var songsIsLoaded: Bool {get set}
     func displayAlbumInfo(viewModel: AlbumDetailsViewModel)
     func displaySongs(viewModel: SongsViewModel)
 }
-
 
 final class AlbumDetailsViewController: UIViewController {
    
 //MARK: - Entities
     var router: (NSObject & AlbumDetailsRoutingLogic & AlbumDetailsDataPassing)?
     var interactor: AlbumDetailsBusinessLogic?
+    
+//MARK: - State properties
+    var songsIsLoaded: Bool = false {
+        didSet {
+            if songsIsLoaded {
+                activityIndicator.stopAnimating()
+            }
+        }
+    }
+    private var showButtonType = ShowButtonType.showSongList
+    
 //MARK: - UI Elements
-    var albumInfoLabel: UILabel?
-    var albumImageView: AdvancedImageView?
-    var songListTableView = UITableView()
+    let songListTableView = UITableView()
+    private let albumInfoLabel = UILabel()
+    private let albumImageView = AdvancedImageView()
+    private let showButton = UIButton()
+    private let activityIndicator = UIActivityIndicatorView(style: .large)
     
     private var rows: [SongCellIdentifiable] = []
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -44,35 +52,75 @@ final class AlbumDetailsViewController: UIViewController {
         setupLayout()
         interactor?.fetchAlbumData()
     }
+//    MARK: - Actions
+    @objc private func showButtonTapped(sender: UIButton) {
+        sender.backgroundColor = #colorLiteral(red: 0.7630645037, green: 0.1636582017, blue: 0.05129658431, alpha: 1)
+        sender.tintColor = .white
+        
+        
+        switch showButtonType {
+        case .showSongList:
+            sender.isEnabled = false
+            albumImageView.isHidden = true
+            albumInfoLabel.isHidden = true
+            songListTableView.fadeInFromLeftSide {
+                sender.isEnabled = true
+            }
+            
+            if !songsIsLoaded {
+                getSongList()
+            }
+            showButtonType = .showAlbumInfo
+            showButton.setTitle(showButtonType.rawValue, for: .normal)
+            
+        case .showAlbumInfo:
+            sender.isEnabled = false
+            songListTableView.isHidden = true
+            albumInfoLabel.fadeInFromRightSide()
+            albumImageView.fadeInFromRightSide {
+                sender.isEnabled = true
+            }
+            showButtonType = .showSongList
+            sender.setTitle(showButtonType.rawValue, for: .normal)
+        }
+    }
     
+    @objc private func showButtonTouchDown(sender: UIButton) {
+        sender.backgroundColor = #colorLiteral(red: 0.5443205237, green: 0.1194817498, blue: 0.04500549287, alpha: 1)
+        sender.tintColor = .lightGray
+    }
+    
+    private func getSongList() {
+        songListTableView.addSubview(activityIndicator)
+        activityIndicator.center = view.center
+        activityIndicator.startAnimating()
+        interactor?.fetchSongList()
+    }
+    
+//    MARK: - Setting  parameters for UI elements
     
     private func setupLayout() {
         view.backgroundColor = .white
-        albumImageView = createImageView()
-        albumInfoLabel = createLabel()
+        songListTableView.addSubview(activityIndicator)
+       
         let albumInfoStackView = createStackView()
+        setImageViewParameters(imageView: albumImageView)
+        setLabelParameters(label: albumInfoLabel)
+        setButtonParameters(button: showButton)
         
-        
-        guard let albumImageView = albumImageView else { return }
-        guard let albumInfoLabel = albumInfoLabel else { return }
-        let button = createButton()
-        button.addTarget(self, action: #selector(getSongs), for: .touchUpInside)
-        
-        albumImageView.isHidden = true
-        albumInfoLabel.isHidden = true
         albumInfoStackView.addArrangedSubview(albumImageView)
         albumInfoStackView.addArrangedSubview(albumInfoLabel)
         albumInfoStackView.addArrangedSubview(songListTableView)
-        albumInfoStackView.addArrangedSubview(button)
+        albumInfoStackView.addArrangedSubview(showButton)
         
         view.addSubview(albumInfoStackView)
-        setPramsForTableView(tableView: songListTableView)
+        setTableViewParameters(tableView: songListTableView)
         setConstraints(for: albumInfoStackView)
     }
     
-    private func setPramsForTableView(tableView: UITableView) {
-        tableView.backgroundColor = .yellow
-        
+    
+    private func setTableViewParameters(tableView: UITableView) {
+        tableView.isHidden = true
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.heightAnchor.constraint(equalToConstant: self.view.frame.height / 2).isActive = true
         tableView.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
@@ -83,49 +131,36 @@ final class AlbumDetailsViewController: UIViewController {
         let padding = 10.0
         view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: padding).isActive = true
         view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -padding).isActive = true
-        view.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
-        view.heightAnchor.constraint(equalToConstant: self.view.frame.height / 1.3).isActive = true
+        view.centerYAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerYAnchor).isActive = true
+        view.heightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.heightAnchor, constant: -padding).isActive = true
     }
     
-    @objc private func getSongs() {
-        interactor?.fetchSongList()
-    }
-    
-    
-//    MARK: - Creating UI Elements
-    private func createImageView() -> AdvancedImageView {
-        let imageView = AdvancedImageView()
+    private func setImageViewParameters(imageView: AdvancedImageView){
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.backgroundColor = .yellow
         imageView.heightAnchor.constraint(equalToConstant: self.view.frame.height / 2).isActive = true
         imageView.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
-        
-        return imageView
     }
     
-    private func createLabel() -> UILabel {
-        let label = UILabel()
+    private func setLabelParameters(label: UILabel) {
         label.numberOfLines = 0
         label.text = "AlbumInfo"
-        label.backgroundColor = .gray
-            .withAlphaComponent(0.7)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.heightAnchor.constraint(equalToConstant: self.view.frame.width / 3).isActive = true
         label.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
-        
-        return label
     }
     
-    private func createButton() -> UIButton {
-        let button = UIButton()
-        button.setTitle("Show song list", for: .normal)
-        button.backgroundColor = .red
+    private func setButtonParameters(button: UIButton) {
+        button.setTitle(showButtonType.rawValue, for: .normal)
+        button.backgroundColor = #colorLiteral(red: 0.7630645037, green: 0.1636582017, blue: 0.05129658431, alpha: 1)
         button.tintColor = .white
         button.layer.cornerRadius = 10
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.clipsToBounds = true
+
         button.heightAnchor.constraint(equalToConstant: self.view.frame.width / 7).isActive = true
         button.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
-        return button
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(showButtonTapped(sender:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(showButtonTouchDown(sender:)), for: .touchDown)
     }
     
     private func createStackView() -> UIStackView {
@@ -137,38 +172,28 @@ final class AlbumDetailsViewController: UIViewController {
         return stackView
     }
     
-    private func createTableView() -> UITableView {
-        let tableView = UITableView()
-        tableView.backgroundColor = .blue
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.heightAnchor.constraint(equalToConstant: self.view.frame.height / 2).isActive = true
-        tableView.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
-        return tableView
-    }
-    
-//        MARK: - Configure Clean Swift pattern
+//  MARK: - Configure Clean Swift pattern
     private func setup() {
         AlbumDetailsConfigurator.shared.configure(with: self)
     }
 }
 
-
-//      MARK: - Display Logic
+//  MARK: - Display Logic
 extension AlbumDetailsViewController: AlbumDetailsDisplayLogic {
-    
+        
      func displayAlbumInfo(viewModel: AlbumDetailsViewModel) {
-        albumInfoLabel?.text = viewModel.description
+         albumInfoLabel.text = viewModel.description
         
          guard let imageURL = viewModel.albumViewModel.imageURLHighResolution else { return }
          
-         albumImageView?.setImage(by: imageURL, forKey: viewModel.albumViewModel.highResolutionImageKey)
+         albumImageView.setImage(by: imageURL, forKey: viewModel.albumViewModel.highResolutionImageKey)
     }
     
     func displaySongs(viewModel: SongsViewModel) {
         rows = viewModel.rows
+        songsIsLoaded = true
         songListTableView.reloadData()
     }
-    
 }
 // MARK: - TableView functions
 extension AlbumDetailsViewController: UITableViewDataSource, UITableViewDelegate {
@@ -185,9 +210,7 @@ extension AlbumDetailsViewController: UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let cellViewModel = rows[indexPath.row]
-        return CGFloat(cellViewModel.height + 5)
+        return CGFloat(cellViewModel.height)
     }
-    
- 
-    
+  
 }

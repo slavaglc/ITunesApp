@@ -10,15 +10,33 @@ import UIKit
 
 final class AdvancedImageView: UIImageView {
     
+    private var activityIndicator = UIActivityIndicatorView(style: .medium)
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        activityIndicator.center = self.center
+    }
+    
     func setImage(image: UIImage) {
         self.image = image
     }
     
     func setImage(by url: URL, forKey key: Int) {
+        activityIndicator = UIActivityIndicatorView(style: .medium)
+        addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        chooseFetchingWay(url: url, key: key) { [weak self] in
+            self?.activityIndicator.stopAnimating()
+        }
+    }
+    
+    private func chooseFetchingWay(url: URL, key: Int, completion: @escaping ()->()) {
         if !ImageManager.shared.cacheContainsImage(at: key) {
             fetchImage(url: url, forKey: key) { image in
-                DispatchQueue.main.async {
-                    self.image = image
+                DispatchQueue.main.async { [weak self] in
+                    self?.image = image
+                    self?.moveInFromZero()
+                    completion()
                 }
                 ImageManager.shared.saveImageDataToCache(with: image, forKey: key)
             }
@@ -28,6 +46,7 @@ final class AdvancedImageView: UIImageView {
                 guard let image = image else { return }
                 DispatchQueue.main.async {
                     self.image = image
+                    completion()
                 }
             }
         }
