@@ -21,10 +21,11 @@ final class AlbumListViewController: UICollectionViewController, UISearchBarDele
     private var searchBegings: Bool = false
     //    MARK: - UI Elements
     private let activityIndicator = UIActivityIndicatorView(style: .large)
-    
+    private let searchBar = UISearchBar()
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         AlbumListConfigurator.shared.configure(with: self)
         getAlbums()
     }
@@ -62,16 +63,10 @@ final class AlbumListViewController: UICollectionViewController, UISearchBarDele
         
     }
     
-    private func getAlbums(for searchType: SearchingType = SearchingType.random) {
-        activityIndicator.startAnimating()
-        searchBegings = true
-        collectionView.reloadData()
-        interactor?.fetchAlbums(for: searchType)
-    }
     
     private func addSearchbar(for navBar: UINavigationBar) {
         let frame = CGRect(x: navBar.bounds.midX, y: navBar.bounds.midY, width: navBar.frame.width / 1.3, height: navBar.frame.height)
-        let searchBar = UISearchBar(frame: frame)
+        searchBar.frame = frame
         
         searchBar.tintColor = .white
         searchBar.searchTextField.delegate = self
@@ -95,10 +90,17 @@ final class AlbumListViewController: UICollectionViewController, UISearchBarDele
         self.navigationItem.rightBarButtonItem = searchButtonItem
         searchButton.addTarget(self, action: #selector(showSearchButtonPressed(sender:)), for: .touchUpInside)
     }
+    
     //MARK: - Actions
+   
     @objc private func searchBarEdited(sender: UISearchBar) {
-        guard let searchText = sender.text else {
-            getAlbums()
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(runSearchRequest), object: nil)
+        perform(#selector(runSearchRequest), with: nil, afterDelay: 0.5)
+    }
+    
+    @objc func runSearchRequest() {
+        guard let searchText = searchBar.text else {
+            getAlbums(for: .random)
             return
         }
         getAlbums(for: .searchingFor(searchText))
@@ -124,6 +126,17 @@ final class AlbumListViewController: UICollectionViewController, UISearchBarDele
             break
         }
     }
+    
+    
+    private func getAlbums(for searchType: SearchingType = SearchingType.random) {
+        activityIndicator.startAnimating()
+        searchBegings = true
+        collectionView.reloadData()
+        interactor?.fetchAlbums(for: searchType)
+    }
+    
+    
+    
 }
 
 //MARK: - DisplayLogic

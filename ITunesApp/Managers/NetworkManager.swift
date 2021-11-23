@@ -9,6 +9,7 @@ import Foundation
 
 
 
+
 public final class NetworkManager {
     
     static let shared = NetworkManager()
@@ -18,20 +19,23 @@ public final class NetworkManager {
     
     private init() {}
     
-    func fetchAlbumsData(for searchType: SearchingType, completion: @escaping (_ albums: [Album])->()) {
+    func fetchAlbumsData(for searchType: SearchingType, completion: @escaping (_ albums: [Album])->())  {
         
-        lastRequestTime = getCurrentTime()
-        let requestTime = lastRequestTime
+//        lastRequestTime = getCurrentTime()
+//        let requestTime = lastRequestTime
         
         
         guard let url = getSearchQueryURL(for: searchType) else { return }
         let mainGroup = DispatchGroup()
-        guard requestTime == lastRequestTime else { return }
+//        guard requestTime == lastRequestTime else { return }
+        
+    
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data else {
+                
                 print(error?.localizedDescription ?? "error")
                 return }
-            
+           
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: [])
                 guard let jsonDict = json as? [String : Any] else { return  print("error with getting  album json")}
@@ -40,10 +44,14 @@ public final class NetworkManager {
                 guard let albums = self.getAlbumArrayByJSON(results: results) else { return }
                 mainGroup.leave()
                 
-                mainGroup.notify(queue: .main) { [weak self] in
-                    guard self?.lastRequestTime == requestTime else { return }
+                mainGroup.notify(qos: .default, flags: .barrier, queue: .main) {
                     completion(albums)
                 }
+                
+//                mainGroup.notify(queue: .main) { [weak self] in
+////                    guard self?.lastRequestTime == requestTime else { return }
+//
+//                }
                 
             } catch let error {
                 print(error.localizedDescription)
