@@ -9,7 +9,9 @@ import UIKit
 
 
 protocol AlbumListDisplayLogic {
+    var activityIndicator: UIActivityIndicatorView { get set }
     func showAlbums(viewModel: AlbumList.PresentingAlbums.ViewModel)
+    func showActivityIndidcator()
 }
 
 final class AlbumListViewController: UICollectionViewController, UISearchBarDelegate {
@@ -20,7 +22,7 @@ final class AlbumListViewController: UICollectionViewController, UISearchBarDele
     // MARK: - State properties
     private var searchBegings: Bool = false
     //    MARK: - UI Elements
-    private let activityIndicator = UIActivityIndicatorView(style: .large)
+    var activityIndicator = UIActivityIndicatorView(style: .large)
     private let searchBar = UISearchBar()
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -58,9 +60,7 @@ final class AlbumListViewController: UICollectionViewController, UISearchBarDele
         navigationBar.standardAppearance = navBarAppearance
         navigationBar.scrollEdgeAppearance = navBarAppearance
         navigationBar.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        
-        
-        
+   
     }
     
     
@@ -127,9 +127,7 @@ final class AlbumListViewController: UICollectionViewController, UISearchBarDele
         }
     }
     
-    
     private func getAlbums(for searchType: SearchingType = SearchingType.random) {
-        activityIndicator.startAnimating()
         searchBegings = true
         collectionView.reloadData()
         interactor?.fetchAlbums(for: searchType)
@@ -141,12 +139,17 @@ final class AlbumListViewController: UICollectionViewController, UISearchBarDele
 
 //MARK: - DisplayLogic
 extension AlbumListViewController: AlbumListDisplayLogic {
+
     func showAlbums(viewModel: AlbumList.PresentingAlbums.ViewModel) {
         items = viewModel.items
         activityIndicator.stopAnimating()
         searchBegings = false
         collectionView.reloadData()
         
+    }
+    
+    func showActivityIndidcator() {
+        activityIndicator.startAnimating()
     }
 }
 // MARK: - CollectionView Functions

@@ -24,6 +24,9 @@ final class AlbumListInteractor: AlbumListDataStore {
 extension AlbumListInteractor: AlbumListBusinessLogic {
     
     func fetchAlbums(for searchType: SearchingType) {
+        
+        presenter?.presentActivityIndicator()
+        
         var searchType = searchType
         switch searchType {
         case .random:

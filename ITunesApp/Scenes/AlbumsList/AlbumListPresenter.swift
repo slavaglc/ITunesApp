@@ -10,6 +10,7 @@ import Foundation
 
 protocol AlbumListPresentationLogic {
     func presentAlbums(response: AlbumList.PresentingAlbums.Response)
+    func presentActivityIndicator()
 }
 
 final class AlbumListPresenter {
@@ -27,6 +28,10 @@ extension AlbumListPresenter: AlbumListPresentationLogic {
                 
         let viewModel = AlbumList.PresentingAlbums.ViewModel.init(items: items)
         viewController?.showAlbums(viewModel: viewModel)
+    }
+    
+    func presentActivityIndicator() {
+        viewController?.showActivityIndidcator()
     }
     
 }
