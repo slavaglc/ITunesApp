@@ -10,8 +10,10 @@ import UIKit
 
 protocol AlbumListDisplayLogic {
     var activityIndicator: UIActivityIndicatorView { get set }
+    var searchBegins: Bool { get set }
     func showAlbums(viewModel: AlbumList.PresentingAlbums.ViewModel)
     func showActivityIndidcator()
+    func reloadData()
 }
 
 final class AlbumListViewController: UICollectionViewController, UISearchBarDelegate {
@@ -20,7 +22,7 @@ final class AlbumListViewController: UICollectionViewController, UISearchBarDele
     private var items: [AlbumCellIdentifiable] = []
     
     // MARK: - State properties
-    private var searchBegings: Bool = false
+    var searchBegins: Bool = false
     //    MARK: - UI Elements
     var activityIndicator = UIActivityIndicatorView(style: .large)
     private let searchBar = UISearchBar()
@@ -128,8 +130,7 @@ final class AlbumListViewController: UICollectionViewController, UISearchBarDele
     }
     
     private func getAlbums(for searchType: SearchingType = SearchingType.random) {
-        searchBegings = true
-        collectionView.reloadData()
+        
         interactor?.fetchAlbums(for: searchType)
     }
     
@@ -139,17 +140,19 @@ final class AlbumListViewController: UICollectionViewController, UISearchBarDele
 
 //MARK: - DisplayLogic
 extension AlbumListViewController: AlbumListDisplayLogic {
-
+   
     func showAlbums(viewModel: AlbumList.PresentingAlbums.ViewModel) {
         items = viewModel.items
-        activityIndicator.stopAnimating()
-        searchBegings = false
         collectionView.reloadData()
         
     }
     
     func showActivityIndidcator() {
         activityIndicator.startAnimating()
+    }
+    
+    func reloadData() {
+        collectionView.reloadData()
     }
 }
 // MARK: - CollectionView Functions
@@ -164,7 +167,7 @@ extension AlbumListViewController: UICollectionViewDelegateFlowLayout {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        searchBegings ? 0 : items.count
+        searchBegins ? 0 : items.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
