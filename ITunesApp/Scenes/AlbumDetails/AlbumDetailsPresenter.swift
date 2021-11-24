@@ -6,12 +6,15 @@
 //
 
 import Foundation
+import UIKit
 
 
 
 protocol AlbumDetailsPresentingLogic {
     func presentAlbumInfo(response: AlbumDetails.PresentingAlbum.Response)
     func presentSongList(response: AlbumDetails.PresentingSongs.Response)
+    func presentActivityIndicator()
+    func presentFinishOfLoadCondition()
 }
 
 final class AlbumDetailsPresenter: AlbumDetailsPresentingLogic {
@@ -33,6 +36,16 @@ final class AlbumDetailsPresenter: AlbumDetailsPresentingLogic {
         }
         let viewModel = SongsViewModel.init(rows: rows)
         viewController?.displaySongs(viewModel: viewModel)
+        presentFinishOfLoadCondition()
+    }
+    
+    func presentActivityIndicator() {
+        viewController?.activityIndicator.startAnimating()
+    }
+    
+    func presentFinishOfLoadCondition() {
+        viewController?.songsLoaded = false
+        viewController?.activityIndicator.stopAnimating()
     }
     
     private func getDescription(for response: AlbumDetails.PresentingAlbum.Response) -> String {

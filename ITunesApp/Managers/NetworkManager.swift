@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 
 
@@ -15,52 +16,30 @@ public final class NetworkManager {
     static let shared = NetworkManager()
     private let host = "itunes.apple.com"
     private let limitOfAlbums = 200
-    private var lastRequestTime = 0
+    
+    private var albumFetchingDataTasks: [URLSessionDataTask] = []
     
     private init() {}
     
-    func fetchAlbumsData(for searchType: SearchingType, completion: @escaping (_ albums: [Album])->())  {
-        
-//        lastRequestTime = getCurrentTime()
-//        let requestTime = lastRequestTime
-        
-        
+   func fetchAlbumsData(for searchType: SearchingType, completion: @escaping (_ albums: [Album])->())  {
+ 
         guard let url = getSearchQueryURL(for: searchType) else { return }
-        let mainGroup = DispatchGroup()
-//        guard requestTime == lastRequestTime else { return }
         
-    
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data = data else {
-                
-                print(error?.localizedDescription ?? "error")
-                return }
-           
-            do {
-                let json = try JSONSerialization.jsonObject(with: data, options: [])
-                guard let jsonDict = json as? [String : Any] else { return  print("error with getting  album json")}
-                guard let results = jsonDict["results"] as? Array<Any> else { return print("error with cast json as array")}
-                mainGroup.enter()
-                guard let albums = self.getAlbumArrayByJSON(results: results) else { return }
-                mainGroup.leave()
-                
-                mainGroup.notify(qos: .default, flags: .barrier, queue: .main) {
-                    completion(albums)
-                }
-                
-//                mainGroup.notify(queue: .main) { [weak self] in
-////                    guard self?.lastRequestTime == requestTime else { return }
-//
-//                }
-                
-            } catch let error {
-                print(error.localizedDescription)
+        let configuration = URLSessionConfiguration.default
+        let session = URLSession(configuration: configuration)
+        let dataTask = getDataTaskForFetchingAlbums(with: url, for: session, completion: completion)
+        albumFetchingDataTasks.append(dataTask)
+        
+        for (requestNumber, task) in albumFetchingDataTasks.enumerated() {
+            if requestNumber == albumFetchingDataTasks.count - 1 {
+                task.resume()
+            } else {
+                task.cancel()
             }
-            
-        }.resume()
+        }
     }
     
-    func fetchSongsData(by albumID: Int, completion: @escaping ([Song])->()) {
+   func fetchSongsData(by albumID: Int, completion: @escaping ([Song])->()) {
         guard let url = getSongListQueryURL(albumID: albumID) else { return print("bad request")}
         
         let mainGroup = DispatchGroup()
@@ -109,6 +88,34 @@ public final class NetworkManager {
         components.queryItems?.append(URLQueryItem(name: "entity", value: "album"))
         components.queryItems?.append(URLQueryItem(name: "limit", value: "\(limitOfAlbums)"))
         return components.url
+    }
+    
+    private func getDataTaskForFetchingAlbums(with url: URL, for session: URLSession, completion: @escaping (_ albums: [Album])->()) -> URLSessionDataTask {
+     
+        let mainGroup = DispatchGroup()
+      let dataTask =  session.dataTask(with: url) { data, response, error in
+            guard let data = data else {
+                print(error?.localizedDescription ?? "error")
+                return }
+           
+            do {
+                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                guard let jsonDict = json as? [String : Any] else { return  print("error with getting  album json")}
+                guard let results = jsonDict["results"] as? Array<Any> else { return print("error with cast json as array")}
+                mainGroup.enter()
+                guard let albums = self.getAlbumArrayByJSON(results: results) else { return }
+                mainGroup.leave()
+                
+                mainGroup.notify(qos: .default, flags: .barrier, queue: .main) { [weak self] in
+                    self?.albumFetchingDataTasks.removeAll()
+                    completion(albums)
+                }
+                
+            } catch let error {
+                print(error.localizedDescription)
+            }
+        }
+        return dataTask
     }
     
     private func getSongListQueryURL(albumID: Int) -> URL? {

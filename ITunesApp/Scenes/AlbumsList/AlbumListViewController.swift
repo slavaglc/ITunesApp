@@ -12,7 +12,6 @@ protocol AlbumListDisplayLogic {
     var activityIndicator: UIActivityIndicatorView { get set }
     var searchBegins: Bool { get set }
     func showAlbums(viewModel: AlbumList.PresentingAlbums.ViewModel)
-    func showActivityIndidcator()
     func reloadData()
 }
 
@@ -100,7 +99,7 @@ final class AlbumListViewController: UICollectionViewController, UISearchBarDele
         perform(#selector(runSearchRequest), with: nil, afterDelay: 0.5)
     }
     
-    @objc func runSearchRequest() {
+    @objc private func runSearchRequest() {
         guard let searchText = searchBar.text else {
             getAlbums(for: .random)
             return
@@ -130,7 +129,6 @@ final class AlbumListViewController: UICollectionViewController, UISearchBarDele
     }
     
     private func getAlbums(for searchType: SearchingType = SearchingType.random) {
-        
         interactor?.fetchAlbums(for: searchType)
     }
     
@@ -145,10 +143,6 @@ extension AlbumListViewController: AlbumListDisplayLogic {
         items = viewModel.items
         collectionView.reloadData()
         
-    }
-    
-    func showActivityIndidcator() {
-        activityIndicator.startAnimating()
     }
     
     func reloadData() {

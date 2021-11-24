@@ -7,7 +7,8 @@
 import UIKit
 
 protocol AlbumDetailsDisplayLogic {
-    var songsIsLoaded: Bool {get set}
+    var songsLoaded: Bool {get set}
+    var activityIndicator: UIActivityIndicatorView { get set }
     func displayAlbumInfo(viewModel: AlbumDetailsViewModel)
     func displaySongs(viewModel: SongsViewModel)
 }
@@ -19,21 +20,17 @@ final class AlbumDetailsViewController: UIViewController {
     var interactor: AlbumDetailsBusinessLogic?
     
 //MARK: - State properties
-    var songsIsLoaded: Bool = false {
-        didSet {
-            if songsIsLoaded {
-                activityIndicator.stopAnimating()
-            }
-        }
-    }
+    var songsLoaded: Bool = false
+    
     private var showButtonType = ShowButtonType.showSongList
     
 //MARK: - UI Elements
     let songListTableView = UITableView()
+    var activityIndicator = UIActivityIndicatorView(style: .large)
     private let albumInfoLabel = UILabel()
     private let albumImageView = AdvancedImageView()
     private let showButton = UIButton()
-    private let activityIndicator = UIActivityIndicatorView(style: .large)
+    
     
     
     private var rows: [SongCellIdentifiable] = []
@@ -67,7 +64,7 @@ final class AlbumDetailsViewController: UIViewController {
                 sender.isEnabled = true
             }
             
-            if !songsIsLoaded {
+            if !songsLoaded {
                 getSongList()
             }
             showButtonType = .showAlbumInfo
@@ -91,8 +88,6 @@ final class AlbumDetailsViewController: UIViewController {
     }
     
     private func getSongList() {
-        songListTableView.addSubview(activityIndicator)
-        activityIndicator.startAnimating()
         interactor?.fetchSongList()
     }
     
@@ -102,7 +97,6 @@ final class AlbumDetailsViewController: UIViewController {
         view.backgroundColor = .white
         setActivityIndicatorParameters(activityIndicator: activityIndicator)
         songListTableView.addSubview(activityIndicator)
-        
         
         let albumInfoStackView = createStackView()
         setImageViewParameters(imageView: albumImageView)
@@ -190,7 +184,7 @@ final class AlbumDetailsViewController: UIViewController {
 
 //  MARK: - Display Logic
 extension AlbumDetailsViewController: AlbumDetailsDisplayLogic {
-        
+  
      func displayAlbumInfo(viewModel: AlbumDetailsViewModel) {
          albumInfoLabel.text = viewModel.description
         
@@ -201,7 +195,7 @@ extension AlbumDetailsViewController: AlbumDetailsDisplayLogic {
     
     func displaySongs(viewModel: SongsViewModel) {
         rows = viewModel.rows
-        songsIsLoaded = true
+        songsLoaded = true
         songListTableView.reloadData()
     }
 }

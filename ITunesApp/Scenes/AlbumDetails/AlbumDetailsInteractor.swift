@@ -33,6 +33,7 @@ final class AlbumDetailsInteractor: AlbumDetailsDataStore, AlbumDetailsBusinessL
     
     func fetchSongList() {
         guard let album = album else { return }
+        presenter?.presentActivityIndicator()
         NetworkManager.shared.fetchSongsData(by: album.albumID) { [weak self] songs in
             let response = AlbumDetails.PresentingSongs.Response.init(songs: songs)
             self?.presenter?.presentSongList(response: response)
