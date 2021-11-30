@@ -17,8 +17,7 @@ struct Album {
     let releaseDate: String?
     let country: String?
     let trackCount: Int?
-//    let lowResolutionKey: Int?
-//    let highResolutionKey: Int?
+
     
     init(by resultJSON: [String: Any]) {
         let album = resultJSON

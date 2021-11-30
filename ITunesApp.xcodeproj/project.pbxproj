@@ -13,6 +13,8 @@
 		F9835D23274909F900A86B14 /* SongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9835D22274909F900A86B14 /* SongTableViewCell.swift */; };
 		F9835D2527498E6E00A86B14 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9835D2427498E6E00A86B14 /* UIExtensions.swift */; };
 		F9835D27274A4EF000A86B14 /* StateModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9835D26274A4EF000A86B14 /* StateModels.swift */; };
+		F9835D302756C29000A86B14 /* AlbumsTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9835D2F2756C29000A86B14 /* AlbumsTabBarController.swift */; };
+		F9835D322756C5C900A86B14 /* AlbumsTabBarConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9835D312756C5C900A86B14 /* AlbumsTabBarConfigurator.swift */; };
 		F9E5124E273EDC3200259B80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E5124D273EDC3200259B80 /* AppDelegate.swift */; };
 		F9E51250273EDC3200259B80 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E5124F273EDC3200259B80 /* SceneDelegate.swift */; };
 		F9E51257273EDC3300259B80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9E51256273EDC3300259B80 /* Assets.xcassets */; };
@@ -62,6 +64,8 @@
 		F9835D22274909F900A86B14 /* SongTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; };
 		F9835D2427498E6E00A86B14 /* UIExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
 		F9835D26274A4EF000A86B14 /* StateModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateModels.swift; sourceTree = "<group>"; };
+		F9835D2F2756C29000A86B14 /* AlbumsTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsTabBarController.swift; sourceTree = "<group>"; };
+		F9835D312756C5C900A86B14 /* AlbumsTabBarConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsTabBarConfigurator.swift; sourceTree = "<group>"; };
 		F9E5124A273EDC3200259B80 /* ITunesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ITunesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9E5124D273EDC3200259B80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F9E5124F273EDC3200259B80 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -132,6 +136,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		F9835D332756C64700A86B14 /* AlbumsTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				F9835D2F2756C29000A86B14 /* AlbumsTabBarController.swift */,
+				F9835D312756C5C900A86B14 /* AlbumsTabBarConfigurator.swift */,
+			);
+			path = AlbumsTabBar;
+			sourceTree = "<group>";
+		};
 		F9E51241273EDC3200259B80 = {
 			isa = PBXGroup;
 			children = (
@@ -189,6 +202,7 @@
 				F9835D1C2746EE3800A86B14 /* CustomViews */,
 				F9E51287273EF52D00259B80 /* Extensions */,
 				F9E5128F2740162B00259B80 /* Models */,
+				F9835D332756C64700A86B14 /* AlbumsTabBar */,
 				F9E51286273EF42900259B80 /* AlbumsList */,
 				F9E512972741875B00259B80 /* AlbumDetails */,
 			);
@@ -389,6 +403,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9835D322756C5C900A86B14 /* AlbumsTabBarConfigurator.swift in Sources */,
 				F9835D202748EC1800A86B14 /* Song.swift in Sources */,
 				F9835D27274A4EF000A86B14 /* StateModels.swift in Sources */,
 				F9E512A12741894B00259B80 /* AlbumListRouter.swift in Sources */,
@@ -401,6 +416,7 @@
 				F9E5129B274187F300259B80 /* AlbumDetailsInteractor.swift in Sources */,
 				F9E512942740437200259B80 /* NetworkManager.swift in Sources */,
 				F9E5124E273EDC3200259B80 /* AppDelegate.swift in Sources */,
+				F9835D302756C29000A86B14 /* AlbumsTabBarController.swift in Sources */,
 				F9835D1B27458B7100A86B14 /* AlbumDetailsModels.swift in Sources */,
 				F9E51250273EDC3200259B80 /* SceneDelegate.swift in Sources */,
 				F9E51285273EF1C900259B80 /* AlbumListConfigurator.swift in Sources */,

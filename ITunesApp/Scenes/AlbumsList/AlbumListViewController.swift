@@ -42,6 +42,7 @@ final class AlbumListViewController: UICollectionViewController, UISearchBarDele
     }
     
     
+    
     //MARK: - Set parameters for UI Elements
     private func setupLayout() {
         guard let navigationBar = navigationController?.navigationBar else { return }
@@ -79,7 +80,8 @@ final class AlbumListViewController: UICollectionViewController, UISearchBarDele
         searchBar.layer.cornerRadius = 10
         
         let searchBarItem = UIBarButtonItem(customView: searchBar)
-        navigationItem.leftBarButtonItem = searchBarItem
+        tabBarController?.navigationItem.leftBarButtonItem = searchBarItem
+    
     }
     
     private func addSearchButton() {
@@ -88,7 +90,7 @@ final class AlbumListViewController: UICollectionViewController, UISearchBarDele
         searchButton.tintColor = .white
         searchButton.setImage(searchImage, for: .normal)
         let searchButtonItem = UIBarButtonItem(customView: searchButton)
-        self.navigationItem.rightBarButtonItem = searchButtonItem
+        tabBarController?.navigationItem.rightBarButtonItem = searchButtonItem
         searchButton.addTarget(self, action: #selector(showSearchButtonPressed(sender:)), for: .touchUpInside)
     }
     
@@ -108,7 +110,7 @@ final class AlbumListViewController: UICollectionViewController, UISearchBarDele
     }
     
     @objc private func showSearchButtonPressed(sender: UIButton) {
-        guard let searchBar = navigationItem.leftBarButtonItem?.customView as? UISearchBar else { return }
+        guard let searchBar = tabBarController?.navigationItem.leftBarButtonItem?.customView as? UISearchBar else { return }
         
         switch sender.tag {
         case 0: //search
