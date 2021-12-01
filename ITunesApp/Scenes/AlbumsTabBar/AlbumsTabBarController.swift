@@ -14,12 +14,4 @@ final class AlbumsTabBarController: UITabBarController {
         super.viewDidLoad()
         AlbumsTabBarConfigurator.shared.configure(with: self)
     }
-    
-}
-
-class TemporaryVC: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .blue
-    }
 }

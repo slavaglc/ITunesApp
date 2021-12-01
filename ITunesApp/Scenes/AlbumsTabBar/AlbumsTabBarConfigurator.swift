@@ -15,13 +15,15 @@ final class AlbumsTabBarConfigurator {
     
     func configure(with viewController: AlbumsTabBarController) {
         
-        viewController.tabBar.barTintColor = #colorLiteral(red: 0.7356632352, green: 0.1479174197, blue: 0.05585322529, alpha: 1)
+        viewController.tabBar.barTintColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
+        viewController.tabBar.backgroundColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
+        viewController.tabBar.tintColor = .lightText
         let albumListVC = AlbumListViewController(collectionViewLayout: UICollectionViewFlowLayout())
-        let secondVC = TemporaryVC()
+        let historyAlbumsVC = HistoryAlbumsTableViewController()
         
-        albumListVC.title = "Albums"
-        secondVC.title = "Second VC"
+        albumListVC.title = "Search"
+        historyAlbumsVC.title = "History"
         
-        viewController.setViewControllers([albumListVC, secondVC], animated: false)
+        viewController.setViewControllers([albumListVC, historyAlbumsVC], animated: false)
     }
 }

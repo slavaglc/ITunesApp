@@ -15,6 +15,11 @@
 		F9835D27274A4EF000A86B14 /* StateModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9835D26274A4EF000A86B14 /* StateModels.swift */; };
 		F9835D302756C29000A86B14 /* AlbumsTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9835D2F2756C29000A86B14 /* AlbumsTabBarController.swift */; };
 		F9835D322756C5C900A86B14 /* AlbumsTabBarConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9835D312756C5C900A86B14 /* AlbumsTabBarConfigurator.swift */; };
+		F9835D352757E21600A86B14 /* HistoryAlbumsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9835D342757E21600A86B14 /* HistoryAlbumsViewController.swift */; };
+		F9835D372757E23E00A86B14 /* HistoryAlbumsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9835D362757E23E00A86B14 /* HistoryAlbumsInteractor.swift */; };
+		F9835D392757E3D100A86B14 /* HistoryAlbumsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9835D382757E3D100A86B14 /* HistoryAlbumsPresenter.swift */; };
+		F9835D3B2757E3E100A86B14 /* HistoryAlbumsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9835D3A2757E3E100A86B14 /* HistoryAlbumsConfigurator.swift */; };
+		F9835D3D2757E3EF00A86B14 /* HistoryAlbumsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9835D3C2757E3EF00A86B14 /* HistoryAlbumsRouter.swift */; };
 		F9E5124E273EDC3200259B80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E5124D273EDC3200259B80 /* AppDelegate.swift */; };
 		F9E51250273EDC3200259B80 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E5124F273EDC3200259B80 /* SceneDelegate.swift */; };
 		F9E51257273EDC3300259B80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9E51256273EDC3300259B80 /* Assets.xcassets */; };
@@ -66,6 +71,11 @@
 		F9835D26274A4EF000A86B14 /* StateModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateModels.swift; sourceTree = "<group>"; };
 		F9835D2F2756C29000A86B14 /* AlbumsTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsTabBarController.swift; sourceTree = "<group>"; };
 		F9835D312756C5C900A86B14 /* AlbumsTabBarConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsTabBarConfigurator.swift; sourceTree = "<group>"; };
+		F9835D342757E21600A86B14 /* HistoryAlbumsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryAlbumsViewController.swift; sourceTree = "<group>"; };
+		F9835D362757E23E00A86B14 /* HistoryAlbumsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryAlbumsInteractor.swift; sourceTree = "<group>"; };
+		F9835D382757E3D100A86B14 /* HistoryAlbumsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryAlbumsPresenter.swift; sourceTree = "<group>"; };
+		F9835D3A2757E3E100A86B14 /* HistoryAlbumsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryAlbumsConfigurator.swift; sourceTree = "<group>"; };
+		F9835D3C2757E3EF00A86B14 /* HistoryAlbumsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryAlbumsRouter.swift; sourceTree = "<group>"; };
 		F9E5124A273EDC3200259B80 /* ITunesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ITunesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9E5124D273EDC3200259B80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F9E5124F273EDC3200259B80 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -145,6 +155,18 @@
 			path = AlbumsTabBar;
 			sourceTree = "<group>";
 		};
+		F9835D3E2757E50600A86B14 /* HistoryAlbums */ = {
+			isa = PBXGroup;
+			children = (
+				F9835D342757E21600A86B14 /* HistoryAlbumsViewController.swift */,
+				F9835D362757E23E00A86B14 /* HistoryAlbumsInteractor.swift */,
+				F9835D382757E3D100A86B14 /* HistoryAlbumsPresenter.swift */,
+				F9835D3A2757E3E100A86B14 /* HistoryAlbumsConfigurator.swift */,
+				F9835D3C2757E3EF00A86B14 /* HistoryAlbumsRouter.swift */,
+			);
+			path = HistoryAlbums;
+			sourceTree = "<group>";
+		};
 		F9E51241273EDC3200259B80 = {
 			isa = PBXGroup;
 			children = (
@@ -204,6 +226,7 @@
 				F9E5128F2740162B00259B80 /* Models */,
 				F9835D332756C64700A86B14 /* AlbumsTabBar */,
 				F9E51286273EF42900259B80 /* AlbumsList */,
+				F9835D3E2757E50600A86B14 /* HistoryAlbums */,
 				F9E512972741875B00259B80 /* AlbumDetails */,
 			);
 			path = Scenes;
@@ -409,11 +432,13 @@
 				F9E512A12741894B00259B80 /* AlbumListRouter.swift in Sources */,
 				F9E5128C2740141C00259B80 /* AlbumCollectionViewCell.swift in Sources */,
 				F9E51283273EEDE100259B80 /* AlbumListPresenter.swift in Sources */,
+				F9835D3D2757E3EF00A86B14 /* HistoryAlbumsRouter.swift in Sources */,
 				F9E51281273EEDD300259B80 /* AlbumListInteractor.swift in Sources */,
 				F9E5129F2741882E00259B80 /* AlbumDetailsConfigurator.swift in Sources */,
 				F9E5129627410DB100259B80 /* ImageManager.swift in Sources */,
 				F9E5128E274015C200259B80 /* AlbumListModels.swift in Sources */,
 				F9E5129B274187F300259B80 /* AlbumDetailsInteractor.swift in Sources */,
+				F9835D352757E21600A86B14 /* HistoryAlbumsViewController.swift in Sources */,
 				F9E512942740437200259B80 /* NetworkManager.swift in Sources */,
 				F9E5124E273EDC3200259B80 /* AppDelegate.swift in Sources */,
 				F9835D302756C29000A86B14 /* AlbumsTabBarController.swift in Sources */,
@@ -421,8 +446,11 @@
 				F9E51250273EDC3200259B80 /* SceneDelegate.swift in Sources */,
 				F9E51285273EF1C900259B80 /* AlbumListConfigurator.swift in Sources */,
 				F9835D23274909F900A86B14 /* SongTableViewCell.swift in Sources */,
+				F9835D3B2757E3E100A86B14 /* HistoryAlbumsConfigurator.swift in Sources */,
 				F9E51299274187C200259B80 /* AlbumDetailsViewController.swift in Sources */,
 				F9E512A32741985D00259B80 /* AlbumDetailsRouter.swift in Sources */,
+				F9835D372757E23E00A86B14 /* HistoryAlbumsInteractor.swift in Sources */,
+				F9835D392757E3D100A86B14 /* HistoryAlbumsPresenter.swift in Sources */,
 				F9E5127F273EE8D500259B80 /* AlbumListViewController.swift in Sources */,
 				F9E51289273EF5C700259B80 /* NSObject+ClassName.swift in Sources */,
 				F9E512912740164900259B80 /* Album.swift in Sources */,
