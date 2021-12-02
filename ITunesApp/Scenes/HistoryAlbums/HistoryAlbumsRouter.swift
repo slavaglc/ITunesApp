@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+
+protocol HistoryAlbumsRoutingLogic {
+    
+}
+
+
+final class HistoryAlbumsRouter {
+    
+}

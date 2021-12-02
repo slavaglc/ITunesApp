@@ -19,6 +19,16 @@ protocol AlbumListDataStore {
 final class AlbumListInteractor: AlbumListDataStore {
     var presenter: AlbumListPresentationLogic?
     var albums: [Album] = []
+    
+    private func saveToHistory(for searchType: SearchingType) {
+        switch searchType {
+        case .random:
+            break
+        case .searchingFor(let string):
+            guard !string.isEmpty else { break }
+            HistoryManager.shared.saveHistory(for: string)
+        }
+    }
 }
 
 extension AlbumListInteractor: AlbumListBusinessLogic {
@@ -36,10 +46,11 @@ extension AlbumListInteractor: AlbumListBusinessLogic {
         
         NetworkManager.shared.fetchAlbumsData(for: searchType) { [weak self] albums in
             let sortedAlbums = albums.sorted { $0.name?.localizedCaseInsensitiveCompare($1.name ?? "") == ComparisonResult.orderedAscending
-                
             }
+            
             self?.albums = sortedAlbums
             let response = AlbumList.PresentingAlbums.Response(albums: sortedAlbums)
+            self?.saveToHistory(for: searchType)
             self?.presenter?.presentAlbums(response: response)
         }
     }

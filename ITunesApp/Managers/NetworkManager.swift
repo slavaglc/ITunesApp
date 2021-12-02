@@ -9,8 +9,6 @@ import Foundation
 import UIKit
 
 
-
-
 public final class NetworkManager {
     
     static let shared = NetworkManager()
@@ -157,14 +155,7 @@ public final class NetworkManager {
     private func getFormattedQueryString(string: String) -> String {
         string.replacingOccurrences(of: " ", with: "+")
     }
-    
-    private func getCurrentTime() -> Int {
-        let date = Date()
-        let calendar = Calendar.current
-        let nanosecond = calendar.component(.nanosecond, from: date)
-        return nanosecond
-    }
-    
+        
     private func getRandomChar() -> String {
         let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
         guard let result = letters.randomElement() else { return "a" }

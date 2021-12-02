@@ -133,9 +133,6 @@ final class AlbumListViewController: UICollectionViewController, UISearchBarDele
     private func getAlbums(for searchType: SearchingType = SearchingType.random) {
         interactor?.fetchAlbums(for: searchType)
     }
-    
-    
-    
 }
 
 //MARK: - DisplayLogic

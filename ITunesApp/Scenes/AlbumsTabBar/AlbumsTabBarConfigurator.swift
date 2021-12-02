@@ -19,7 +19,7 @@ final class AlbumsTabBarConfigurator {
         viewController.tabBar.backgroundColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
         viewController.tabBar.tintColor = .lightText
         let albumListVC = AlbumListViewController(collectionViewLayout: UICollectionViewFlowLayout())
-        let historyAlbumsVC = HistoryAlbumsTableViewController()
+        let historyAlbumsVC = HistoryAlbumsViewController()
         
         albumListVC.title = "Search"
         historyAlbumsVC.title = "History"
