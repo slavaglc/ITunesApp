@@ -23,7 +23,16 @@ final class AlbumsTabBarConfigurator {
         
         albumListVC.title = "Search"
         historyAlbumsVC.title = "History"
-        
         viewController.setViewControllers([albumListVC, historyAlbumsVC], animated: false)
+        setImages(viewController: viewController)
+    }
+    
+    private func setImages(viewController: AlbumsTabBarController) {
+        let imageNames = ["magnifyingglass.circle", "clock" ]
+        
+        guard let items = viewController.tabBar.items else { return }
+        for (index, item) in items.enumerated() {
+            item.image = UIImage(systemName: imageNames[index])
+        }
     }
 }

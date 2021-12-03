@@ -26,8 +26,5 @@ final class HistoryAlbumsConfigurator {
         
         
         viewController.tableView.register(HistoryTableViewCell.self, forCellReuseIdentifier: HistoryTableViewCell.nameOfClass)
-        viewController.tableView.delegate = viewController
-        viewController.tableView.dataSource = viewController
-        
     }
 }

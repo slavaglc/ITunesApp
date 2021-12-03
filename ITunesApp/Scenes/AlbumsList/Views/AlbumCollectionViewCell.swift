@@ -73,7 +73,8 @@ final class AlbumCollectionViewCell: UICollectionViewCell, CellModelRepresentabl
         nameLabel.frame = CGRect(x: labelPositionX, y: labelPositionY, width: labelWidth, height: labelHeight)
         nameLabel.textAlignment = .center
         
-        nameLabel.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+        nameLabel.backgroundColor = .black
+            .withAlphaComponent(0.5)
         nameLabel.textColor = .white
     }
     
@@ -92,7 +93,6 @@ final class AlbumCollectionViewCell: UICollectionViewCell, CellModelRepresentabl
         
     }
     
-    
     private func updateView() {
         guard let viewModel = viewModel as? AlbumCellViewModel else { return }
         nameLabel.text = viewModel.name
@@ -100,6 +100,5 @@ final class AlbumCollectionViewCell: UICollectionViewCell, CellModelRepresentabl
         guard let imageURL = viewModel.imageURL else { return }
         
         imageView.setImage(by: imageURL, forKey: viewModel.lowResolutionImageKey)
-        
     }
 }

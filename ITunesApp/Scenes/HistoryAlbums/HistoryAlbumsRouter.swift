@@ -30,9 +30,9 @@ extension HistoryAlbumsRouter: HistoryAlbumsRoutingLogic, HistoryAlbumsDataPassi
         guard var destinationDS = destinationVC.router?.dataStore else { return }
     
 
-        
-        passDataToAlbumList(source: sourceDS, destination: &destinationDS)
         navigateToAlbumList(source: viewController, destination: destinationVC)
+        passDataToAlbumList(source: sourceDS, destination: &destinationDS)
+        
     }
     
     private func navigateToAlbumList(source: HistoryAlbumsViewController, destination: AlbumListViewController) {
