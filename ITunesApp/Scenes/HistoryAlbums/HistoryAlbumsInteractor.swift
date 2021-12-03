@@ -26,4 +26,5 @@ extension HistoryAlbumsInteractor: HistoryAlbumsBusinessLogic {
         let response = HistoryAlbums.PresentingHistory.Response.init(historyRequests: history)
         presenter?.presentHistoryAlbums(response: response)
     }
+
 }

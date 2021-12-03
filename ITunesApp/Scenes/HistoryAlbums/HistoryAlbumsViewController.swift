@@ -15,6 +15,7 @@ protocol HistoryAlbumsDisplayLogic {
 
 class HistoryAlbumsViewController: UITableViewController {
     var interactor: HistoryAlbumsBusinessLogic?
+    var router: HistoryAlbumsRoutingLogic?
     private var rows: [HistoryCellIdentifiable] = []
 //    MARK: - UI Elements
     var activityIndicator = UIActivityIndicatorView(style: .large)
@@ -29,8 +30,19 @@ class HistoryAlbumsViewController: UITableViewController {
         super.viewDidAppear(animated)
         interactor?.fetchHistoryAlbums()
     }
+}
+// MARK: - Display logic
+extension HistoryAlbumsViewController: HistoryAlbumsDisplayLogic {
+    
+    func displaySearchRequests(viewModel: HistoryAlbums.PresentingHistory.ViewModel) {
+        rows = viewModel.rows
+        tableView.reloadData()
+    }
+}
 
-    // MARK: - Table view data source
+// MARK: - Table view data source
+extension HistoryAlbumsViewController {
+  
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         rows.count
@@ -42,13 +54,8 @@ class HistoryAlbumsViewController: UITableViewController {
         cell.viewModel = cellViewModel
         return cell
     }
-
-}
-
-extension HistoryAlbumsViewController: HistoryAlbumsDisplayLogic {
     
-    func displaySearchRequests(viewModel: HistoryAlbums.PresentingHistory.ViewModel) {
-        rows = viewModel.rows
-        tableView.reloadData()
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        router?.routeToAlbumList()
     }
 }

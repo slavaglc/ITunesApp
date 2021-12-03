@@ -50,9 +50,7 @@ public final class NetworkManager {
                 
                 guard  let results = jsonDict["results"] as? Array<Any> else { return }
                 mainGroup.enter()
-                guard let songs = self.getSongArrayByJSON(results: results) else {
-                    
-                    return }
+                guard let songs = self.getSongArrayByJSON(results: results) else { return }
                 
                 mainGroup.leave()
                 

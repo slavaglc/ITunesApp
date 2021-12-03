@@ -14,9 +14,12 @@ protocol AlbumListBusinessLogic {
 
 protocol AlbumListDataStore {
     var albums: [Album] { get }
+    var searchText: String? { get }
 }
 
 final class AlbumListInteractor: AlbumListDataStore {
+    var searchText: String?
+    
     var presenter: AlbumListPresentationLogic?
     var albums: [Album] = []
     
@@ -29,6 +32,7 @@ final class AlbumListInteractor: AlbumListDataStore {
             HistoryManager.shared.saveHistory(for: string)
         }
     }
+    
 }
 
 extension AlbumListInteractor: AlbumListBusinessLogic {

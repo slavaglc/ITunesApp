@@ -46,8 +46,8 @@ final class AlbumListViewController: UICollectionViewController, UISearchBarDele
     //MARK: - Set parameters for UI Elements
     private func setupLayout() {
         guard let navigationBar = navigationController?.navigationBar else { return }
-        
         collectionView.backgroundColor = .white
+        collectionView.keyboardDismissMode = .onDrag
         setupNavigationBar(for: navigationBar)
         addSearchbar(for: navigationBar)
         addSearchButton()

@@ -26,9 +26,9 @@ final class AlbumListRouter: AlbumListRoutingLogic, AlbumListDataPassing {
         let albumDetailsVC = AlbumDetailsViewController()
         guard let viewController = viewController else { return }
         guard let destinationRouter = albumDetailsVC.router else { return }
-        guard var destinationDC = destinationRouter.dataStore else { return }
+        guard var destinationDS = destinationRouter.dataStore else { return }
         guard let dataStore = dataStore else { return }
-        passDataStoreToAlbumDetailsVC(source: dataStore, destination: &destinationDC)
+        passDataStoreToAlbumDetailsVC(source: dataStore, destination: &destinationDS)
         navigateToAlbumDetails(source: viewController, destination: albumDetailsVC)
     }
     
