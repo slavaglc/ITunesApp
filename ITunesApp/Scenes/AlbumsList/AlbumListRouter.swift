@@ -14,7 +14,7 @@ protocol AlbumListRoutingLogic {
 }
 
 protocol AlbumListDataPassing {
-    var dataStore: AlbumListDataStore? { get }
+    var dataStore: AlbumListDataStore? { get set }
 }
 
 final class AlbumListRouter: AlbumListRoutingLogic, AlbumListDataPassing {

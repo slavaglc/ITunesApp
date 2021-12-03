@@ -17,7 +17,7 @@ protocol AlbumListDisplayLogic {
 
 final class AlbumListViewController: UICollectionViewController, UISearchBarDelegate {
     var interactor: AlbumListBusinessLogic?
-    var router: AlbumListRoutingLogic?
+    var router: (AlbumListRoutingLogic & AlbumListDataPassing)?
     private var items: [AlbumCellIdentifiable] = []
     
     // MARK: - State properties

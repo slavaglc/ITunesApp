@@ -15,7 +15,7 @@ protocol HistoryAlbumsDisplayLogic {
 
 class HistoryAlbumsViewController: UITableViewController {
     var interactor: HistoryAlbumsBusinessLogic?
-    var router: HistoryAlbumsRoutingLogic?
+    var router: (HistoryAlbumsDataPassing & HistoryAlbumsRoutingLogic)?
     private var rows: [HistoryCellIdentifiable] = []
 //    MARK: - UI Elements
     var activityIndicator = UIActivityIndicatorView(style: .large)
@@ -57,5 +57,6 @@ extension HistoryAlbumsViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         router?.routeToAlbumList()
+        tableView.deselectRow(at: indexPath, animated: false)
     }
 }

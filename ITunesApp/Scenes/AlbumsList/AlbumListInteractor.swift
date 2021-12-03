@@ -14,11 +14,17 @@ protocol AlbumListBusinessLogic {
 
 protocol AlbumListDataStore {
     var albums: [Album] { get }
-    var searchText: String? { get }
+    var searchText: String? { get set }
 }
 
 final class AlbumListInteractor: AlbumListDataStore {
-    var searchText: String?
+    var searchText: String? {
+        didSet {
+            if let searchText = searchText {
+                fetchAlbums(for: .searchingFor(searchText))
+            }
+        }
+    }
     
     var presenter: AlbumListPresentationLogic?
     var albums: [Album] = []

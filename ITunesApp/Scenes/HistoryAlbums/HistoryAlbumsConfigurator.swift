@@ -21,6 +21,7 @@ final class HistoryAlbumsConfigurator {
         viewController.router = router
         interactor.presenter = presenter
         presenter.viewController = viewController
+        router.dataStore = interactor
         router.viewController = viewController
         
         

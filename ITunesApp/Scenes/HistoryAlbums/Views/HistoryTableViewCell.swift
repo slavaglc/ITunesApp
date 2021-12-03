@@ -27,13 +27,7 @@ final class HistoryTableViewCell: UITableViewCell, HistoryTableViewCellRepresent
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
+        
     override func layoutSubviews() {
         super.layoutSubviews()
         initiazile()
