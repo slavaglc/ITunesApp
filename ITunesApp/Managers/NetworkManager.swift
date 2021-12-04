@@ -27,14 +27,7 @@ public final class NetworkManager {
         let session = URLSession(configuration: configuration)
         let dataTask = getDataTaskForFetchingAlbums(with: url, for: session, completion: completion)
         albumFetchingDataTasks.append(dataTask)
-        
-        for (requestNumber, task) in albumFetchingDataTasks.enumerated() {
-            if requestNumber == albumFetchingDataTasks.count - 1 {
-                task.resume()
-            } else {
-                task.cancel()
-            }
-        }
+        startLastRequestFetching()
     }
     
    func fetchSongsData(by albumID: Int, completion: @escaping ([Song])->()) {
@@ -64,6 +57,16 @@ public final class NetworkManager {
         }.resume()
     }
     
+    private func startLastRequestFetching() {
+        for (requestNumber, task) in albumFetchingDataTasks.enumerated() {
+            if requestNumber == albumFetchingDataTasks.count - 1 {
+                task.resume()
+            } else {
+                task.cancel()
+            }
+        }
+    }
+    
     private func getSearchQueryURL(for searchType: SearchingType) -> URL? {
         var components = URLComponents()
         components.scheme = "https"
@@ -87,13 +90,13 @@ public final class NetworkManager {
     }
     
     private func getDataTaskForFetchingAlbums(with url: URL, for session: URLSession, completion: @escaping (_ albums: [Album])->()) -> URLSessionDataTask {
-     
+        
         let mainGroup = DispatchGroup()
-      let dataTask =  session.dataTask(with: url) { data, response, error in
+        let dataTask =  session.dataTask(with: url) { data, response, error in
             guard let data = data else {
                 print(error?.localizedDescription ?? "error")
                 return }
-           
+            
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: [])
                 guard let jsonDict = json as? [String : Any] else { return  print("error with getting  album json")}

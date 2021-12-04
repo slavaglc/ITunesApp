@@ -20,7 +20,6 @@ protocol AlbumDetailsDataStore {
 
 final class AlbumDetailsInteractor: AlbumDetailsDataStore, AlbumDetailsBusinessLogic  {
     
-    
     var presenter: AlbumDetailsPresentingLogic?
     var album: Album?
     

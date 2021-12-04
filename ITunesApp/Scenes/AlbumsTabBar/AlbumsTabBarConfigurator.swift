@@ -20,6 +20,8 @@ final class AlbumsTabBarConfigurator {
         viewController.tabBar.tintColor = .white
         let albumListVC = AlbumListViewController(collectionViewLayout: UICollectionViewFlowLayout())
         let historyAlbumsVC = HistoryAlbumsViewController()
+        viewController.albumListVC = albumListVC
+        viewController.historyAlbumsVC = historyAlbumsVC
         
         albumListVC.title = "Search"
         historyAlbumsVC.title = "History"

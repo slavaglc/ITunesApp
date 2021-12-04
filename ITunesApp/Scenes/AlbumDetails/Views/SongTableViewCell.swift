@@ -49,12 +49,12 @@ final class SongTableViewCell: UITableViewCell, SongTableViewCellRepresentable {
         addSubview(trackNameLabel)
         addSubview(trackMillsLabel)
         trackNameLabel.heightAnchor.constraint(equalToConstant: contentView.frame.height / 3).isActive = true
-        trackNameLabel.widthAnchor.constraint(equalToConstant: self.frame.width / 1.2).isActive = true
+//        trackNameLabel.widthAnchor.constraint(equalToConstant: self.frame.width / 1.2).isActive = true
         trackNameLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
         trackNameLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         
         trackMillsLabel.heightAnchor.constraint(equalToConstant: contentView.frame.height / 3).isActive = true
-        trackMillsLabel.widthAnchor.constraint(equalToConstant: 80).isActive = true
+//        trackMillsLabel.widthAnchor.constraint(equalToConstant: 80).isActive = true
         trackMillsLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
         trackMillsLabel.leadingAnchor.constraint(greaterThanOrEqualTo: trackNameLabel.trailingAnchor, constant: 10).isActive = true
         trackMillsLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true

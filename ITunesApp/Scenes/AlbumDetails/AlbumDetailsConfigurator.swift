@@ -21,14 +21,16 @@ final class AlbumDetailsConfigurator {
         let router = AlbumDetailsRouter()
         viewController.interactor = interactor
         viewController.router = router
-        viewController.songListTableView.delegate = viewController
-        viewController.songListTableView.dataSource = viewController
-        viewController.songListTableView.register(SongTableViewCell.self, forCellReuseIdentifier: SongTableViewCell.nameOfClass)
         interactor.presenter = presenter
         presenter.viewController = viewController
         router.viewController = viewController
-        router.dataStore = interactor
-  
+        router.dataStore = interactor  
+    }
+    
+    public func configureTableView(with view: AlbumDetailsView) {
+        view.songListTableView.delegate = view
+        view.songListTableView.dataSource = view
+        view.songListTableView.register(SongTableViewCell.self, forCellReuseIdentifier: SongTableViewCell.nameOfClass)
     }
     
 }
