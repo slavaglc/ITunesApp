@@ -14,6 +14,7 @@ final class AlbumDetailsView: UIView {
     
     lazy var songListTableView: UITableView = {
         let tableView = UITableView()
+        tableView.backgroundColor = .white
         tableView.isHidden = true
         return tableView }()
     
@@ -26,9 +27,20 @@ final class AlbumDetailsView: UIView {
         return stackView
     }()
     
+    lazy var showButton: UIButton = {
+        let button = UIButton()
+        button.setTitle(showButtonType.rawValue, for: .normal)
+        button.backgroundColor = #colorLiteral(red: 0.7630645037, green: 0.1636582017, blue: 0.05129658431, alpha: 1)
+        button.tintColor = .white
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
+        return button
+    }()
+    
+    
+    
     private let albumInfoLabel = UILabel()
     private let albumImageView = AdvancedImageView()
-    private let showButton = UIButton()
     private var rows: [SongCellIdentifiable] = []
     var songsLoaded: Bool = false
     private var showButtonType = ShowButtonType.showSongList
@@ -63,19 +75,19 @@ final class AlbumDetailsView: UIView {
         albumInfoStackView.addArrangedSubview(albumInfoLabel)
         albumInfoStackView.addArrangedSubview(songListTableView)
         albumInfoStackView.addArrangedSubview(showButton)
-        setTableViewParameters(tableView: songListTableView)
+        
         
         addSubview(albumInfoStackView)
         setConstraints(for: albumInfoStackView)
         setButtonParameters(button: showButton)
         setLabelParameters(label: albumInfoLabel)
         setImageViewParameters(imageView: albumImageView)
+        setTableViewParameters(tableView: songListTableView)
     }
     
     
     private func setTableViewParameters(tableView: UITableView) {
         
-        songListTableView.backgroundColor = .white
         songListTableView.translatesAutoresizingMaskIntoConstraints = false
         songListTableView.widthAnchor.constraint(equalTo: albumInfoStackView.widthAnchor).isActive = true
         songListTableView.separatorStyle = .none
@@ -111,14 +123,7 @@ final class AlbumDetailsView: UIView {
     }
     
     private func setButtonParameters(button: UIButton) {
-        button.setTitle(showButtonType.rawValue, for: .normal)
-        button.backgroundColor = #colorLiteral(red: 0.7630645037, green: 0.1636582017, blue: 0.05129658431, alpha: 1)
-        button.tintColor = .white
-        button.layer.cornerRadius = 10
-        button.clipsToBounds = true
-
         button.heightAnchor.constraint(equalToConstant: frame.width / 7).isActive = true
-        
         button.widthAnchor.constraint(equalTo: albumInfoStackView.widthAnchor).isActive = true
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(showButtonTouchUp(sender:)), for: .touchUpOutside)

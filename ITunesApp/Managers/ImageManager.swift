@@ -21,24 +21,17 @@ public final class ImageManager {
     }
     
     public func fetchImage(url: URL, completion: @escaping (Data?, Error?)->()) {
-        let mainGroup = DispatchGroup()
-        var error: Error?
-        var imageData: Data?
         DispatchQueue.global(qos: .background).async {
-            mainGroup.enter()
-            do {
-                imageData = try Data(contentsOf: url)
-                mainGroup.leave()
-            } catch let dataError {
-                error = dataError
-                mainGroup.leave()
-            }
-           
-            mainGroup.notify(queue: .main) {
-                completion(imageData, error)
-            }
+
+                URLSession.shared.dataTask(with: url) { data, _, error in
+                    guard let data = data else { completion(data, error); return }
+                    DispatchQueue.main.async {
+                        completion(data, error)
+                    }
+                }.resume()
         }
     }
+    
     
     
     public func saveImageDataToCache(with image: UIImage, forKey key: Int) {
