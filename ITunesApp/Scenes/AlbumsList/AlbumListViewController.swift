@@ -15,9 +15,13 @@ protocol AlbumListDisplayLogic {
     func reloadData()
 }
 
-final class AlbumListViewController: UICollectionViewController, UISearchBarDelegate {
+final class AlbumListViewController: UICollectionViewController {
+    
+//    MARK: - Entities
     var interactor: AlbumListBusinessLogic?
     var router: (AlbumListRoutingLogic & AlbumListDataPassing)?
+    
+//    MARK: - Cells
     private var items: [AlbumCellIdentifiable] = []
     
     // MARK: - State properties
@@ -43,8 +47,6 @@ final class AlbumListViewController: UICollectionViewController, UISearchBarDele
         activityIndicator.color = .gray
         view.addSubview(activityIndicator)
     }
-    
-    
     
     //MARK: - Set parameters for UI Elements
     private func setupLayout() {
@@ -78,7 +80,6 @@ extension AlbumListViewController: AlbumListDisplayLogic {
     func showAlbums(viewModel: AlbumList.PresentingAlbums.ViewModel) {
         items = viewModel.items
         collectionView.reloadData()
-        
     }
     
     func reloadData() {
@@ -121,11 +122,5 @@ extension AlbumListViewController: UICollectionViewDelegateFlowLayout {
         0
     }
 }
-// MARK: - TextField functions
-extension AlbumListViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-}
+
 

@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 
-
 protocol AlbumDetailsPresentingLogic {
     func presentAlbumInfo(response: AlbumDetails.PresentingAlbum.Response)
     func presentSongList(response: AlbumDetails.PresentingSongs.Response)
@@ -40,12 +39,11 @@ final class AlbumDetailsPresenter: AlbumDetailsPresentingLogic {
     }
     
     func presentActivityIndicator() {
-        viewController?.activityIndicator.startAnimating()
+        viewController?.showStartLoadingCondition()
     }
     
     func presentFinishOfLoadCondition() {
-        viewController?.songsLoaded = false
-        viewController?.activityIndicator.stopAnimating()
+        viewController?.showStopLoadingCondition()
     }
     
     private func getDescription(for response: AlbumDetails.PresentingAlbum.Response) -> String {

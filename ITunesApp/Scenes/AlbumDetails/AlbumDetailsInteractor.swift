@@ -29,7 +29,6 @@ final class AlbumDetailsInteractor: AlbumDetailsDataStore, AlbumDetailsBusinessL
         presenter?.presentAlbumInfo(response: response)
     }
     
-    
     func fetchSongList() {
         guard let album = album else { return }
         presenter?.presentActivityIndicator()

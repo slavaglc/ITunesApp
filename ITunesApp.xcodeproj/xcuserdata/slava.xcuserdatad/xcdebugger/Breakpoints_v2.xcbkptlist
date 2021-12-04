@@ -14,8 +14,8 @@
             filePath = "ITunesApp/Scenes/AlbumDetails/AlbumDetailsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
             landmarkName = "displaySongs(viewModel:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -30,8 +30,8 @@
             filePath = "ITunesApp/Scenes/AlbumDetails/AlbumDetailsPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
             landmarkName = "presentSongList(response:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -46,8 +46,8 @@
             filePath = "ITunesApp/Scenes/AlbumDetails/AlbumDetailsInteractor.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
             landmarkName = "fetchSongList()"
             landmarkType = "7">
          </BreakpointContent>
@@ -62,8 +62,8 @@
             filePath = "ITunesApp/Managers/NetworkManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
             landmarkName = "fetchSongsData(by:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -72,22 +72,6 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "6BA397ED-132D-4972-B5C3-B84907937E2E"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ITunesApp/Managers/NetworkManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
-            landmarkName = "fetchSongsData(by:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "C2899A87-94F9-4608-B0F5-12151FBB3499"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -110,8 +94,8 @@
             filePath = "ITunesApp/Managers/NetworkManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
             landmarkName = "fetchSongsData(by:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -126,8 +110,8 @@
             filePath = "ITunesApp/Managers/NetworkManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
             landmarkName = "fetchSongsData(by:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -142,41 +126,9 @@
             filePath = "ITunesApp/Managers/NetworkManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
             landmarkName = "fetchSongsData(by:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "4AFF5714-7DE1-404F-BD2E-6E5F3BE083B2"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ITunesApp/Scenes/AlbumDetails/AlbumDetailsViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
-            landmarkName = "tableView(_:cellForRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "371CAB64-5D9F-4270-A88D-10572E8F8B79"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ITunesApp/Scenes/AlbumDetails/AlbumDetailsViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
-            landmarkName = "tableView(_:numberOfRowsInSection:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -199,38 +151,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B60F5EBF-16E2-455E-B02B-ED06C4EA92EA"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ITunesApp/Scenes/AlbumDetails/AlbumDetailsViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
-            landmarkName = "tableView(_:cellForRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "7D7D0610-430D-4F26-AF8B-2D07BF4D838D"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ITunesApp/Scenes/AlbumDetails/AlbumDetailsViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
-            landmarkName = "tableView(_:heightForRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "8B4A2BC5-D079-4396-8C62-AA5367A17AB9"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -238,8 +158,8 @@
             filePath = "ITunesApp/Scenes/AlbumDetails/AlbumDetailsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
             landmarkName = "displaySongs(viewModel:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -311,22 +231,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "C5369FF4-81DC-4AF5-9F5E-5C04E206FE79"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ITunesApp/Scenes/AlbumsTabBar/AlbumsTabBarController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
-            landmarkName = "showSearchButtonPressed(sender:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "260C83A5-230F-4B46-88A4-F2BCDF4D263E"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -334,8 +238,8 @@
             filePath = "ITunesApp/Scenes/AlbumsList/AlbumListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
             landmarkName = "searchBar"
             landmarkType = "24">
          </BreakpointContent>
@@ -350,8 +254,8 @@
             filePath = "ITunesApp/Scenes/AlbumsList/AlbumListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
             landmarkName = "searchBar"
             landmarkType = "24">
          </BreakpointContent>
@@ -366,8 +270,8 @@
             filePath = "ITunesApp/Scenes/AlbumDetails/Views/AlbumDetailsView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
             landmarkName = "showButtonTapped(sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -382,8 +286,8 @@
             filePath = "ITunesApp/Scenes/AlbumDetails/Views/AlbumDetailsView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
+            startingLineNumber = "171"
+            endingLineNumber = "171"
             landmarkName = "showButtonTapped(sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -398,8 +302,8 @@
             filePath = "ITunesApp/Scenes/Extensions/UIExtensions.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
             landmarkName = "fadeInFromLeftSide(completionAnimation:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -414,8 +318,8 @@
             filePath = "ITunesApp/Scenes/Extensions/UIExtensions.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
             landmarkName = "fadeInFromLeftSide(completionAnimation:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -430,8 +334,8 @@
             filePath = "ITunesApp/Scenes/Extensions/UIExtensions.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
             landmarkName = "fadeInFromLeftSide(completionAnimation:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -446,8 +350,8 @@
             filePath = "ITunesApp/Scenes/AlbumDetails/Views/AlbumDetailsView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
             landmarkName = "showButtonTapped(sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -462,8 +366,8 @@
             filePath = "ITunesApp/Scenes/AlbumDetails/Views/AlbumDetailsView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "156"
-            endingLineNumber = "156"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
             landmarkName = "showButtonTapped(sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -478,8 +382,8 @@
             filePath = "ITunesApp/Scenes/AlbumDetails/Views/AlbumDetailsView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "188"
-            endingLineNumber = "188"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
             landmarkName = "tableView(_:numberOfRowsInSection:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -494,8 +398,8 @@
             filePath = "ITunesApp/Scenes/AlbumDetails/Views/AlbumDetailsView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "193"
-            endingLineNumber = "193"
+            startingLineNumber = "212"
+            endingLineNumber = "212"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -510,8 +414,8 @@
             filePath = "ITunesApp/Scenes/AlbumDetails/Views/AlbumDetailsView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
             landmarkName = "setTableViewParameters(tableView:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -526,8 +430,8 @@
             filePath = "ITunesApp/Scenes/AlbumDetails/Views/AlbumDetailsView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
             landmarkName = "showButtonTapped(sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -542,8 +446,8 @@
             filePath = "ITunesApp/Scenes/AlbumDetails/Views/AlbumDetailsView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
             landmarkName = "setButtonParameters(button:)"
             landmarkType = "7">
          </BreakpointContent>

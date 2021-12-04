@@ -7,6 +7,7 @@
 
 import UIKit
 
+//  MARK:  Animations
 extension UIView {
     
     func moveIn() {

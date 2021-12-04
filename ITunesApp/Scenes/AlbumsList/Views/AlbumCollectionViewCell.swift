@@ -14,16 +14,36 @@ protocol CellModelRepresentable {
 
 final class AlbumCollectionViewCell: UICollectionViewCell, CellModelRepresentable {
     
-    private let imageView = AdvancedImageView()
-    private let nameLabel = UILabel()
-    private let artistLabel = UILabel()
-    
     var viewModel: AlbumCellIdentifiable? {
         didSet{
             updateView()
         }
     }
+//    MARK: - UI Elements
+    private lazy var imageView: AdvancedImageView = {
+        AdvancedImageView()
+    }()
     
+    private lazy var nameLabel: UILabel = {
+       let label = UILabel()
+        label.textAlignment = .center
+        label.backgroundColor = .black
+            .withAlphaComponent(0.5)
+        label.textColor = .white
+        return label
+    }()
+    
+    private lazy var artistLabel: UILabel = {
+       let label = UILabel()
+        label.font = UIFont(name: "Arial-BoldMT", size: 11)
+        label.backgroundColor = .lightGray
+            .withAlphaComponent(0.7)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    
+//    MARK: - Lifecycle
     override init(frame: CGRect) {
         super.init(frame: frame)
         initialize()
@@ -36,9 +56,7 @@ final class AlbumCollectionViewCell: UICollectionViewCell, CellModelRepresentabl
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
         imageView.frame = self.contentView.frame
-        
     }
     
     override func prepareForReuse() {
@@ -57,6 +75,8 @@ final class AlbumCollectionViewCell: UICollectionViewCell, CellModelRepresentabl
         setupArtitsNameLayout()
     }
     
+//    MARK: - Setup UI parameters
+    
     private func initialize() {
         imageView.contentMode = .scaleToFill
         addSubview(imageView)
@@ -71,34 +91,23 @@ final class AlbumCollectionViewCell: UICollectionViewCell, CellModelRepresentabl
         let labelPositionX = self.contentView.bounds.minX
         let labelPositionY = self.contentView.bounds.maxY - nameLabel.frame.height
         nameLabel.frame = CGRect(x: labelPositionX, y: labelPositionY, width: labelWidth, height: labelHeight)
-        nameLabel.textAlignment = .center
-        
-        nameLabel.backgroundColor = .black
-            .withAlphaComponent(0.5)
-        nameLabel.textColor = .white
+
     }
     
     private func setupArtitsNameLayout() {
-        artistLabel.font = UIFont(name: "Arial-BoldMT", size: 11)
-        
         let labelWidth = self.contentView.frame.width
         let labelHeight = artistLabel.font.lineHeight
         let labelPositionX = self.contentView.bounds.minX
         let labelPositionY = self.contentView.bounds.minY
         artistLabel.frame = CGRect(x: labelPositionX, y: labelPositionY, width: labelWidth, height: labelHeight)
-        
-        artistLabel.backgroundColor = .lightGray
-            .withAlphaComponent(0.7)
-        artistLabel.textAlignment = .center
-        
     }
+//  MARK: - Setup values
     
     private func updateView() {
         guard let viewModel = viewModel as? AlbumCellViewModel else { return }
         nameLabel.text = viewModel.name
         artistLabel.text = viewModel.artist
         guard let imageURL = viewModel.imageURL else { return }
-        
         imageView.setImage(by: imageURL, forKey: viewModel.lowResolutionImageKey)
     }
 }

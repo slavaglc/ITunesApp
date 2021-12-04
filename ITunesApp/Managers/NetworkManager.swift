@@ -14,7 +14,6 @@ public final class NetworkManager {
     static let shared = NetworkManager()
     private let host = "itunes.apple.com"
     private let limitOfAlbums = 200
-    
     private var albumFetchingDataTasks: [URLSessionDataTask] = []
     
     private init() {}
@@ -33,8 +32,10 @@ public final class NetworkManager {
    func fetchSongsData(by albumID: Int, completion: @escaping ([Song])->()) {
         guard let url = getSongListQueryURL(albumID: albumID) else { return print("bad request")}
         
-        let mainGroup = DispatchGroup()
-        URLSession.shared.dataTask(with: url) { data, response, error in
+       let mainGroup = DispatchGroup()
+       
+       
+       URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data else { return print(error?.localizedDescription ?? "error with getting songs") }
             
             do {
@@ -43,14 +44,11 @@ public final class NetworkManager {
                 
                 guard  let results = jsonDict["results"] as? Array<Any> else { return }
                 mainGroup.enter()
-                guard let songs = self.getSongArrayByJSON(results: results) else { return }
-                
+                guard let songs = self.getSongArrayByJSON(results: results) else { mainGroup.leave(); return }
                 mainGroup.leave()
-                
                 mainGroup.notify(queue: .main) {
                     completion(songs)
                 }
-                
             } catch let error {
                 print(error.localizedDescription)
             }

@@ -9,12 +9,33 @@ import UIKit
 
 
 final class AlbumsTabBarController: UITabBarController {
-
+//  MARK - ViewControllers
     var albumListVC: AlbumListViewController?
     var historyAlbumsVC: HistoryAlbumsViewController?
+//  MARK: - UI Elements
+    private lazy var searchBar: UISearchBar = {
+        let bar = UISearchBar()
+        bar.tintColor = .white
+        bar.searchTextField.delegate = self
+        bar.searchTextField.textColor = .white
+        bar.searchTextField.addTarget(albumListVC, action: #selector(albumListVC?.searchBarEdited(sender:)), for: .editingChanged)
+        bar.searchTextField.backgroundColor = #colorLiteral(red: 0.7356632352, green: 0.1479174197, blue: 0.05585322529, alpha: 1)
+        bar.isHidden = true
+        bar.placeholder = "Search album"
+        bar.layer.cornerRadius = 10
+        return bar
+    }()
     
-    private let searchBar = UISearchBar()
+    private lazy var searchButton: UIButton = {
+        let button = UIButton()
+        let searchImage = UIImage(systemName: "magnifyingglass")
+        button.tintColor = .white
+        button.setImage(searchImage, for: .normal)
+        button.addTarget(self, action: #selector(showSearchButtonPressed(sender:)), for: .touchUpInside)
+        return button
+    }()
     
+//    MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         AlbumsTabBarConfigurator.shared.configure(with: self)
@@ -24,6 +45,8 @@ final class AlbumsTabBarController: UITabBarController {
         super.viewWillAppear(animated)
         setupLayout()
     }
+    
+//  MARK: - Setup UI settings
     
     private func setupLayout() {
         guard let navigationBar = navigationController?.navigationBar else { return }
@@ -46,36 +69,19 @@ final class AlbumsTabBarController: UITabBarController {
     private func addSearchbar(for navBar: UINavigationBar) {
         let frame = CGRect(x: navBar.bounds.midX, y: navBar.bounds.midY, width: navBar.frame.width / 1.3, height: navBar.frame.height)
         searchBar.frame = frame
-        
-        searchBar.tintColor = .white
-        searchBar.searchTextField.delegate = albumListVC
-        searchBar.searchTextField.textColor = .white
-        searchBar.searchTextField.addTarget(albumListVC, action: #selector(albumListVC?.searchBarEdited(sender:)), for: .editingChanged)
-        searchBar.searchTextField.backgroundColor = #colorLiteral(red: 0.7356632352, green: 0.1479174197, blue: 0.05585322529, alpha: 1)
-        searchBar.isHidden = true
-        searchBar.placeholder = "Search album"
-        searchBar.layer.cornerRadius = 10
-        
         let searchBarItem = UIBarButtonItem(customView: searchBar)
         navigationItem.leftBarButtonItem = searchBarItem
     
     }
     
     private func addSearchButton() {
-        let searchButton = UIButton()
-        let searchImage = UIImage(systemName: "magnifyingglass")
-        searchButton.tintColor = .white
-        searchButton.setImage(searchImage, for: .normal)
         let searchButtonItem = UIBarButtonItem(customView: searchButton)
         navigationItem.rightBarButtonItem = searchButtonItem
-        searchButton.addTarget(self, action: #selector(showSearchButtonPressed(sender:)), for: .touchUpInside)
     }
     
+//    MARK: - Actions
+    
     @objc private func showSearchButtonPressed(sender: UIButton) {
-        
-        
-        
-      
         switch sender.tag {
         case 0: //search
             searchBar.fadeIn() { [weak self] in
@@ -97,5 +103,13 @@ final class AlbumsTabBarController: UITabBarController {
     
     private func albumListIsCurrentVC() -> Bool {
         selectedViewController == albumListVC
+    }
+}
+
+// MARK: - TextField functions
+extension AlbumsTabBarController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
