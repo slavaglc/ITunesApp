@@ -13,6 +13,7 @@ protocol AlbumListDisplayLogic {
     var searchBegins: Bool { get set }
     func showAlbums(viewModel: AlbumList.PresentingAlbums.ViewModel)
     func reloadData()
+    func displaySearchText(text: String)
 }
 
 final class AlbumListViewController: UICollectionViewController {
@@ -68,7 +69,6 @@ final class AlbumListViewController: UICollectionViewController {
     }
     
     //MARK: - Actions
-   
     @objc func searchBarEdited(sender: UISearchBar) {
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(runSearchRequest), object: nil)
         perform(#selector(runSearchRequest), with: nil, afterDelay: 0.5)
@@ -89,18 +89,19 @@ final class AlbumListViewController: UICollectionViewController {
 
 //MARK: - DisplayLogic
 extension AlbumListViewController: AlbumListDisplayLogic {
-   
     func showAlbums(viewModel: AlbumList.PresentingAlbums.ViewModel) {
         items = viewModel.items
         collectionView.reloadData()
     }
-    
     func reloadData() {
         collectionView.reloadData()
     }
+    
+    func displaySearchText(text: String) {
+        searchBar.text = text
+    }
 }
 // MARK: - CollectionView Functions
-
 extension AlbumListViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

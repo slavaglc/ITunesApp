@@ -22,6 +22,7 @@ final class AlbumListInteractor: AlbumListDataStore {
         didSet {
             if let searchText = searchText {
                 fetchAlbums(for: .searchingFor(searchText))
+                presenter?.presentSearchText(text: searchText)
             }
         }
     }
@@ -45,8 +46,8 @@ extension AlbumListInteractor: AlbumListBusinessLogic {
     
     func fetchAlbums(for searchType: SearchingType) {
         presenter?.presentSearchCondition()
-        
         var searchType = searchType
+        
         switch searchType {
         case .random:
             break
@@ -57,7 +58,6 @@ extension AlbumListInteractor: AlbumListBusinessLogic {
         NetworkManager.shared.fetchAlbumsData(for: searchType) { [weak self] albums in
             let sortedAlbums = albums.sorted { $0.name?.localizedCaseInsensitiveCompare($1.name ?? "") == ComparisonResult.orderedAscending
             }
-            
             self?.albums = sortedAlbums
             let response = AlbumList.PresentingAlbums.Response(albums: sortedAlbums)
             self?.saveToHistory(for: searchType)

@@ -12,6 +12,7 @@ protocol AlbumListPresentationLogic {
     func presentAlbums(response: AlbumList.PresentingAlbums.Response)
     func presentSearchCondition()
     func presentReloadingData()
+    func presentSearchText(text: String)
 }
 
 final class AlbumListPresenter {
@@ -19,7 +20,7 @@ final class AlbumListPresenter {
 }
 
 extension AlbumListPresenter: AlbumListPresentationLogic {
-   
+    
     func presentAlbums(response: AlbumList.PresentingAlbums.Response) {
         var items: [AlbumCellViewModel] = []
         
@@ -46,6 +47,10 @@ extension AlbumListPresenter: AlbumListPresentationLogic {
     
     func presentReloadingData() {
         viewController?.reloadData()
+    }
+    
+    func presentSearchText(text: String) {
+        viewController?.displaySearchText(text: text)
     }
     
 }
