@@ -9,7 +9,6 @@ import UIKit
 
 
 protocol HistoryAlbumsDisplayLogic {
-    var activityIndicator: UIActivityIndicatorView { get set }
     func displaySearchRequests(viewModel: HistoryAlbums.PresentingHistory.ViewModel)
 }
 
@@ -17,8 +16,6 @@ class HistoryAlbumsViewController: UITableViewController {
     var interactor: HistoryAlbumsBusinessLogic?
     var router: (HistoryAlbumsDataPassing & HistoryAlbumsRoutingLogic)?
     private var rows: [HistoryCellIdentifiable] = []
-//    MARK: - UI Elements
-    var activityIndicator = UIActivityIndicatorView(style: .large)
 //    MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

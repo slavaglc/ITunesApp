@@ -170,7 +170,6 @@ final class AlbumDetailsView: UIView {
                 songListTableView.fadeInFromLeftSide {
                     sender.isEnabled.toggle()
                 }
-    
                 if !songsLoaded {
                     guard let viewController = viewController else { return }
                     viewController.getSongList()
