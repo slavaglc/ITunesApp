@@ -33,12 +33,6 @@ final class HistoryTableViewCell: UITableViewCell, HistoryTableViewCellRepresent
         initiazile()
         
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
     
     private func initiazile() {
         
