@@ -125,6 +125,7 @@ final class AlbumDetailsView: UIView {
     private func setImageViewParameters(imageView: AdvancedImageView) {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.widthAnchor.constraint(equalTo: albumInfoStackView.widthAnchor).isActive = true
+        imageView.heightAnchor.constraint(equalTo: widthAnchor).isActive = true
     }
     
     
