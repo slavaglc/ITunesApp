@@ -35,9 +35,7 @@ final class AlbumListViewController: UICollectionViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         AlbumListConfigurator.shared.configure(with: self)
-        getAlbums()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,10 +46,21 @@ final class AlbumListViewController: UICollectionViewController {
         view.addSubview(activityIndicator)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        getAlbums()
+    }
+    
     //MARK: - Set parameters for UI Elements
     private func setupLayout() {
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         collectionView.backgroundColor = .white
         collectionView.keyboardDismissMode = .onDrag
+        layout.minimumLineSpacing = 3
+        layout.minimumInteritemSpacing = 0
+        layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 10, right: 5)
+        layout.itemSize = CGSize(width: UIScreen.main.bounds.width / 3.2 , height: UIScreen.main.bounds.width / 3.2 )
+        collectionView.collectionViewLayout = layout
     }
     
     //MARK: - Actions
@@ -88,7 +97,7 @@ extension AlbumListViewController: AlbumListDisplayLogic {
 }
 // MARK: - CollectionView Functions
 
-extension AlbumListViewController: UICollectionViewDelegateFlowLayout {
+extension AlbumListViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cellViewModel = items[indexPath.item]
@@ -104,22 +113,6 @@ extension AlbumListViewController: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         router?.routeToAlbumDetails()
         collectionView.deselectItem(at: indexPath, animated: true)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: UIScreen.main.bounds.width / 3.2 , height: UIScreen.main.bounds.width / 3.2 )
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        UIEdgeInsets(top: 5, left: 5, bottom: 10, right: 5)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        3
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        0
     }
 }
 

@@ -21,7 +21,6 @@ public final class ImageManager {
     
     public func fetchImage(url: URL, completion: @escaping (Data?, Error?)->()) {
         DispatchQueue.global(qos: .background).async {
-
                 URLSession.shared.dataTask(with: url) { data, _, error in
                     guard let data = data else { completion(data, error); return }
                     DispatchQueue.main.async {
@@ -30,8 +29,6 @@ public final class ImageManager {
                 }.resume()
         }
     }
-    
-    
     
     public func saveImageDataToCache(with image: UIImage, forKey key: Int) {
         let key = NSNumber(value: key)

@@ -44,10 +44,8 @@ final class AdvancedImageView: UIImageView {
         } else {
             ImageManager.shared.getCachedImage(for: key) { image in
                 guard let image = image else { return }
-                DispatchQueue.main.async { [weak self] in
-                    self?.image = image
+                    self.image = image
                     completion()
-                }
             }
         }
     }
