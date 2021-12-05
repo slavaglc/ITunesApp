@@ -16,25 +16,22 @@ protocol AlbumListDisplayLogic {
     func displaySearchText(text: String)
 }
 
+
 final class AlbumListViewController: UICollectionViewController {
-    
-//    MARK: - Entities
+//  MARK: - Entities
     var interactor: AlbumListBusinessLogic?
     var router: (AlbumListRoutingLogic & AlbumListDataPassing)?
-    
-//    MARK: - Cells
+//  MARK: - Cells
     private var items: [AlbumCellIdentifiable] = []
-    
     // MARK: - State properties
     var searchBegins: Bool = false
-    private var albumsLoaded = false
-    //    MARK: - UI Elements
+//  MARK: - UI Elements
     var activityIndicator = UIActivityIndicatorView(style: .large)
     private lazy var searchBar: UISearchBar = { () -> UISearchBar in
         let searchBar = tabBarController?.navigationItem.leftBarButtonItem?.customView as? UISearchBar
         return searchBar ?? UISearchBar()
     }()
-    // MARK: - Lifecycle
+//  MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         AlbumListConfigurator.shared.configure(with: self)
@@ -50,13 +47,10 @@ final class AlbumListViewController: UICollectionViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if !albumsLoaded {
-            getAlbums()
-            albumsLoaded.toggle()
-        }
+        interactor?.fetchAlbums(for: .random, loading: .primary)
     }
     
-    //MARK: - Set parameters for UI Elements
+//  MARK: - Set parameters for UI Elements
     private func setupLayout() {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         collectionView.backgroundColor = .white
@@ -68,7 +62,7 @@ final class AlbumListViewController: UICollectionViewController {
         collectionView.collectionViewLayout = layout
     }
     
-    //MARK: - Actions
+//  MARK: - Actions
     @objc func searchBarEdited(sender: UISearchBar) {
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(runSearchRequest), object: nil)
         perform(#selector(runSearchRequest), with: nil, afterDelay: 0.5)
@@ -83,11 +77,11 @@ final class AlbumListViewController: UICollectionViewController {
     }
     
     private func getAlbums(for searchType: SearchingType = SearchingType.random) {
-        interactor?.fetchAlbums(for: searchType)
+        interactor?.fetchAlbums(for: searchType, loading: .regular)
     }
 }
 
-//MARK: - DisplayLogic
+//  MARK: - DisplayLogic
 extension AlbumListViewController: AlbumListDisplayLogic {
     func showAlbums(viewModel: AlbumList.PresentingAlbums.ViewModel) {
         items = viewModel.items
@@ -101,7 +95,7 @@ extension AlbumListViewController: AlbumListDisplayLogic {
         searchBar.text = text
     }
 }
-// MARK: - CollectionView Functions
+//  MARK: - CollectionView Functions
 extension AlbumListViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

@@ -9,7 +9,7 @@ import UIKit
 
 
 final class AlbumsTabBarController: UITabBarController {
-//  MARK - ViewControllers
+//  MARK: - ViewControllers
     var albumListVC: AlbumListViewController?
     var historyAlbumsVC: HistoryAlbumsViewController?
 //  MARK: - UI Elements

@@ -9,7 +9,7 @@ import Foundation
 
 
 protocol AlbumListBusinessLogic {
-    func fetchAlbums(for searchType: SearchingType)
+    func fetchAlbums(for searchType: SearchingType, loading: LoadingType)
 }
 
 protocol AlbumListDataStore {
@@ -18,6 +18,7 @@ protocol AlbumListDataStore {
 }
 
 final class AlbumListInteractor: AlbumListDataStore {
+    
     var searchText: String? {
         didSet {
             if let searchText = searchText {
@@ -29,6 +30,7 @@ final class AlbumListInteractor: AlbumListDataStore {
     
     var presenter: AlbumListPresentationLogic?
     var albums: [Album] = []
+    private var albumsLoaded = false
     
     private func saveToHistory(for searchType: SearchingType) {
         switch searchType {
@@ -39,12 +41,14 @@ final class AlbumListInteractor: AlbumListDataStore {
             HistoryManager.shared.saveHistory(for: string)
         }
     }
-    
 }
 
 extension AlbumListInteractor: AlbumListBusinessLogic {
     
-    func fetchAlbums(for searchType: SearchingType) {
+    func fetchAlbums(for searchType: SearchingType, loading: LoadingType = .regular) {
+        
+        guard loading == .regular || !albumsLoaded else { return }
+        
         presenter?.presentSearchCondition()
         var searchType = searchType
         
@@ -58,6 +62,7 @@ extension AlbumListInteractor: AlbumListBusinessLogic {
         NetworkManager.shared.fetchAlbumsData(for: searchType) { [weak self] albums in
             let sortedAlbums = albums.sorted { $0.name?.localizedCaseInsensitiveCompare($1.name ?? "") == ComparisonResult.orderedAscending
             }
+            self?.albumsLoaded = true
             self?.albums = sortedAlbums
             let response = AlbumList.PresentingAlbums.Response(albums: sortedAlbums)
             self?.saveToHistory(for: searchType)

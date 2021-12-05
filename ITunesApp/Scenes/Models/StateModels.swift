@@ -8,3 +8,8 @@ enum SearchingType {
     case searchingFor(String)
 }
 
+enum LoadingType {
+    case primary
+    case regular
+}
+
