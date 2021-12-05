@@ -26,6 +26,7 @@ final class AlbumListViewController: UICollectionViewController {
     
     // MARK: - State properties
     var searchBegins: Bool = false
+    private var albumsLoaded = false
     //    MARK: - UI Elements
     var activityIndicator = UIActivityIndicatorView(style: .large)
     private lazy var searchBar: UISearchBar = { () -> UISearchBar in
@@ -48,7 +49,10 @@ final class AlbumListViewController: UICollectionViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        getAlbums()
+        if !albumsLoaded {
+            getAlbums()
+            albumsLoaded.toggle()
+        }
     }
     
     //MARK: - Set parameters for UI Elements
