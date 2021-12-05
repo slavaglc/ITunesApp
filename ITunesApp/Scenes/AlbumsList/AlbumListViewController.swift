@@ -16,7 +16,6 @@ protocol AlbumListDisplayLogic {
     func displaySearchText(text: String)
 }
 
-
 final class AlbumListViewController: UICollectionViewController {
 //  MARK: - Entities
     var interactor: AlbumListBusinessLogic?
@@ -40,9 +39,6 @@ final class AlbumListViewController: UICollectionViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupLayout()
-        activityIndicator.center = view.center
-        activityIndicator.color = .gray
-        view.addSubview(activityIndicator)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -60,6 +56,10 @@ final class AlbumListViewController: UICollectionViewController {
         layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 10, right: 5)
         layout.itemSize = CGSize(width: UIScreen.main.bounds.width / 3.2 , height: UIScreen.main.bounds.width / 3.2 )
         collectionView.collectionViewLayout = layout
+        
+        activityIndicator.center = view.center
+        activityIndicator.color = .gray
+        view.addSubview(activityIndicator)
     }
     
 //  MARK: - Actions
@@ -87,6 +87,7 @@ extension AlbumListViewController: AlbumListDisplayLogic {
         items = viewModel.items
         collectionView.reloadData()
     }
+    
     func reloadData() {
         collectionView.reloadData()
     }
