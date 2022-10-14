@@ -39,7 +39,7 @@ final class AlbumListViewController: UICollectionViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupLayout()
-    }
+    }/Users/slava/Documents/Projects/Fanfic/Fanfic/Fonts
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
